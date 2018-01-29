@@ -1,3 +1,6 @@
+body{
+
+}
 h1{
   color:black;
   text-align: center;
@@ -11,6 +14,7 @@ ul{
 }
 li{
   float: left;
+  border-right: 1px solid #bbb;
 }
 li a{
   display: block;
