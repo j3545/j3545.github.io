@@ -10,7 +10,7 @@ h1{
   text-align: center;
 }
 li a:hover{
-  color: green!important;  
+  color: green!important;
 }
 .projects img{
   margin-left: 50px;
@@ -41,6 +41,7 @@ ul{
 .images{
   margin-left: 200px;
 }
-.projects{
-
+#frame{
+  width:700px;
+  height: 500px;
 }
