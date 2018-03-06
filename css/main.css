@@ -1,43 +1,37 @@
-body{
-display: block;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
 
+li {
+    float: right;
 }
-*{
 
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
-h1{
-  color:black;
-  text-align: center;
+
+li a:hover:not(.active) {
+    background-color: #111;
 }
-li a:hover{
-  color: green!important;
+
+.active {
+    background-color: #4CAF50;
 }
+
 .projects img{
   margin-left: 50px;
   display: inline;
   height: 200px;
 }
-.header{
-  text-align:left;
-  margin-left: 250px;
-}
-.links{
-  margin-left: 50px;
-  background-color: #999999;
-  padding-right: 40px;
-}
-li{
-  text-align: left;
-  color:red;
-}
-ul{
-  overflow: hidden;
-  list-style-type: none;
-}
-.desc{
-  margin-left: 50px;
-  text-align: center;
-}
+
 .images{
   margin-left: 200px;
 }
