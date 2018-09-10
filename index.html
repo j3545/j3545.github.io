@@ -2,66 +2,37 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm navbar-dark" style="background: grey;">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Brand -->
-      <a class="navbar-brand" href="#">Jedulz</a>
-      <!-- Links -->
-      <div class="collapse navbar-collapse" id="nav-content">
-        <ul class="navbar-nav">
-          <!---<li class="nav-item">
-            <a class="nav-link" href="#">Link 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link 2</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link 3</a>
-          </li>--->
-        </ul>
-      </div>
-</nav>
-<div class="container-fluid">
-  <div class="row">
-    <div id="title" class="col-sm-12">
-      <p>Hello World!</br>My name is Jesus Quiroz. I am a Front-End Developer</p>
-    </div>
-  </div>
-  <div class="row">
-      <!-- <div class="links">
-        <h1>Goto My:</h1>
-        <ul>
-          <li><a href="https://www.github.com/jedulz">GitHub</a></li>
-          <li><a href="https://www.codepen.io/jedulz">CodePen</a></li>
-          <li><a href="https://www.documents/resume.pdf">Resume</a></li>
-          <li><a href="zen.html">css-zen-garden</a></li>
-        </ul>
-    </div> -->
-    <div class="projects">
-      <div class="row">
-        <p class="header col-sm-2">Projects</h1>
-        <div class="col-sm-8"></div>
-      </div>
-      <div class="row">
-        <div class="project-image col-sm-3">
-          <img class="img-fluid" src="images/quote.png">
+    <nav>
+      <div class="navbar">
+        <a class="active" href="#">Home</a>
+        <div class="dropdown">
+          <button class="dropbtn">Canvas
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Rain</a>
+            <a href="#">Pong</a>
+            <a href="#">Snake</a>
+          </div>
         </div>
-        <div class="project-image col-sm-3">
-          <img class="img-fluid" src="images/wiki.png">
+        <div class="dropdown">
+          <button class="dropbtn">Other Apps
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Article Card</a>
+            <a href="#">Twitch Api Viewer</a>
+            <a href="#">Weather Viewer</a>
+            <a href="#">Wikipedia Viewer</a>
+            <a href="#">Random Quote Generator</a>
+          </div>
         </div>
-        <div class="project-image col-sm-3">
-          <img class="img-fluid" src="images/quote.png">
-        </div>
+        <a href="#">JS Tribute Page</a>
+        <a href="#">Code Pen</a>
+        <a href="#">GitHub</a>
       </div>
-    </div>
-  </div>
-
-  </div>
+    </nav>
   </body>
 </html>
