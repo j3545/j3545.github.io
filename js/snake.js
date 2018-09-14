@@ -1,111 +1,82 @@
-$(document).ready(function () {
-  //Canvas stuff
-  var drawCanvas = $("#drawCanvas")[0];
-  var context = drawCanvas.getContext("2d");
-  var width = $("#drawCanvas").width();
-  var height = $("#drawCanvas").height();
+// Set up canvas
+var canvas = document.getElementById("canvas");
+canvas.width = 800;
+canvas.height = 800;
+var c = canvas.getContext("2d");
 
-  var cell_width = 15;
-  var defaultRun;
-  var snake_food;
-  var userscore;
-  var mySnakeArray;
-  var speed = 80;
+window.addEventListener('resize', function(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  init();
+});
 
-  function start() {
-   defaultRun = "right";
-   createSnake();
-   createFood();
-   userscore = 0;
+/*
+	Player Controls
+*/
+document.onkeydown = function(e){
+  var key = e.which;
+  console.log(key);
+  if(key == 38){//up
+    snake.dy = -snake.speed;
+    snake.dx = 0;
+  }else if(key == 40){//down
+    snake.dy = snake.speed;
+    snake.dx = 0;
+  }else if(key == 39){//right
+    snake.dx = snake.speed;
+    snake.dy = 0;
+  }else if(key == 37){//left
+    snake.dx = -snake.speed;
+    snake.dy = 0;
+  }
+};
 
-   if (typeof game_loop != "undefined") clearInterval(game_loop);
-     game_loop = setInterval(paintSnake, speed);
-   }
-   start();
+// droplet object
+function Snake(x, y, width, height){
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
+  this.speed = 10;
+  this.dx = this.speed;
+  this.dy = 0;
 
-   function createSnake() {
-     var snakeSize = 6;
-     mySnakeArray = [];
-     for (var m = 0; m<snakeSize-1;m++) {
-       mySnakeArray.push({ x: 0, y: 20 });
-     }
-   }
-
-   function createFood() {
-     snake_food = {
-       x: Math.round(Math.random() * (width - cell_width) / cell_width),
-       y: Math.round(Math.random() * (height - cell_width) / cell_width),
-     };
-   }
-
-  function paintSnake() {
-    context.fillStyle = "#999999";
-    context.fillRect(0, 0, width, height);
-    context.strokeStyle = "0000ff";
-    context.strokeRect(0, 0, width, height);
-
-    var pop_x = mySnakeArray[0].x;
-    var pop_y = mySnakeArray[0].y;
-
-    if (defaultRun == "right") pop_x++;
-    else if (defaultRun == "left") pop_x--;
-    else if (defaultRun == "down") pop_y++;
-    else if (defaultRun == "up") pop_y--;
-
-
-    if (pop_x == -1 || pop_x == width / cell_width || pop_y == -1 || pop_y == height / cell_width || check_collision(pop_x, pop_y, mySnakeArray)) {
-      start();
-      return;
+  this.draw = function(){
+    c.fillStyle = "#000";
+    c.fillRect(this.x, this.y, this.width, this.height);
+  }
+  // changes to object over time
+  this.update = function(){
+    this.x += this.dx;
+    this.y += this.dy;
+    if(this.x > canvas.width){
+      this.x = 0;
+    }
+    if(this.x + this.width < 0){
+      this.x = canvas.width;
+    }
+    if(this.y > canvas.height){
+      this.y = 0;
+    }
+    if(this.y < 0){
+      this.y = canvas.height;
     }
 
-    if (pop_x == snake_food.x && pop_y == snake_food.y) {
-      var snake_tail = { x: pop_x, y: pop_y };
-      userscore++;
-      //speed-=20;
-      createFood();
-    }  //test
-    else {
-      var snake_tail = mySnakeArray.pop();
-      snake_tail.x = pop_x; snake_tail.y = pop_y;
-    }
-
-    mySnakeArray.unshift(snake_tail);
-
-    for (var i = 0; i < mySnakeArray.length; i++) {
-      var k = mySnakeArray[i];
-
-      paintCell(k.x, k.y);
-    }
-
-
-    paintCell(snake_food.x, snake_food.y);
-
-    var score_text = "Score: " + userscore;
-    var speed_text = "Speed: " + speed;
-    context.fillText(score_text, width-70, 20);
-    context.fillText(speed_text, width-70, 40)
   }
 
-  function paintCell(x, y) {
-    context.fillStyle = "black";
-    context.fillRect(x * cell_width, y * cell_width, cell_width, cell_width);
-    context.strokeStyle = "white";
-    context.strokeRect(x * cell_width, y * cell_width, cell_width, cell_width);
-  }
+}
 
-  function check_collision(x, y, array) {
-    for (var i = 0; i < array.length; i++) {
-      if (array[i].x == x && array[i].y == y)
-        return true;
-    }
-    return false;
-  }
+function animate(){
+  c.clearRect(0, 0, innerWidth, innerHeight);
+  snake.draw();
+  snake.update();
+  console.log('test');
+}
 
-  $(document).keydown(function (e) {
-    var keyInput = e.which;
-    if (keyInput == "40" && defaultRun != "up") defaultRun = "down";
-    else if (keyInput == "39" && defaultRun != "left") defaultRun = "right";
-    else if (keyInput == "38" && defaultRun != "down") defaultRun = "up";
-    else if (keyInput == "37" && defaultRun != "right") defaultRun = "left";
-  })
-})  
+function init(){
+  snake = new Snake(0, 0, 10, 10);
+  snake.draw();
+  setInterval(animate, 100);//refreshes 10 times a second with 100
+}
+
+init();

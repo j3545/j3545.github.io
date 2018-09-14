@@ -2,37 +2,36 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <nav>
-      <div class="navbar">
-        <a class="active" href="#">Home</a>
-        <div class="dropdown">
-          <button class="dropbtn">Canvas
-            <i class="fa fa-caret-down"></i>
-          </button>
+      <ul>
+        <li><a class="active" href="#">Home</a></li>
+        <li><a href="snake.html">Snake</a></li>
+        <li><a href="rain.html">Rain</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
           <div class="dropdown-content">
-            <a href="#">Rain</a>
-            <a href="#">Pong</a>
-            <a href="#">Snake</a>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
           </div>
-        </div>
-        <div class="dropdown">
-          <button class="dropbtn">Other Apps
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="#">Article Card</a>
-            <a href="#">Twitch Api Viewer</a>
-            <a href="#">Weather Viewer</a>
-            <a href="#">Wikipedia Viewer</a>
-            <a href="#">Random Quote Generator</a>
-          </div>
-        </div>
-        <a href="#">JS Tribute Page</a>
-        <a href="#">Code Pen</a>
-        <a href="#">GitHub</a>
-      </div>
+        </li>
+      </ul>
     </nav>
+    <div class="container" oncontextmenu="return false;">
+      <canvas id="box_jump" style="border:1px solid white;"></canvas>
+      <div class="instructions">Use the arrow keys to move the square, don't lose it.</div>
+      <div class="instructions">The context menu has been disabled in this pen.</div>
+
+      <div class="arrows">
+        <button id="left-arrow"><i class="left"></i>Left</button>
+        <button id="up-arrow"><i class="up"></i>Up</button>
+        <button id="right-arrow"><i class="right"></i>Right</button>
+      </div>
+    </div>
   </body>
+  <script src="js/main.js"></script>
 </html>
