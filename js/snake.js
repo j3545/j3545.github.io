@@ -31,7 +31,7 @@ document.onkeydown = function(e){
   }
 };
 
-// droplet object
+// snake object
 function Snake(x, y, width, height){
   this.x = x;
   this.y = y;
@@ -40,10 +40,20 @@ function Snake(x, y, width, height){
   this.speed = 10;
   this.dx = this.speed;
   this.dy = 0;
+  this.body = [];
+  this.len = 1;
+  this.body.push(c.fillRect(this.x, this.y, this.width, this.height));
+  console.log(this.body);
 
   this.draw = function(){
     c.fillStyle = "#000";
-    c.fillRect(this.x, this.y, this.width, this.height);
+    for(var i = 0; i < this.len; i++){
+    }
+  }
+
+  this.grow = function(){
+    this.len++;
+    this.body.push();
   }
   // changes to object over time
   this.update = function(){
@@ -61,22 +71,59 @@ function Snake(x, y, width, height){
     if(this.y < 0){
       this.y = canvas.height;
     }
+    //check if the food was eaten
+    if(this.x == food.x && this.y == food.y){
+      //make new food
+      this.grow();
+      food.getLocation();
+    }
+  }
+}
 
+function Food(){
+  this.x;
+  this.y;
+  this.width = 10;
+  this.height = 10;
+
+  this.getLocation = function(){
+    this.x = Math.random() * (canvas.width - 20) + 10;
+    this.y = Math.random() * (canvas.height - 20) + 10;
+
+    this.x = this.x/10;
+    this.x = Math.floor(this.x);
+    this.x = this.x*10;
+
+    this.y = this.y/10;
+    this.y = Math.floor(this.y);
+    this.y = this.y*10;
   }
 
+  this.draw = function(){
+    if(this.x >= canvas.width-10){
+      alert('refresh page, food outside canvas');
+    }
+    c.fillStyle = "#ff0000";
+    c.fillRect(this.x, this.y, this.width, this.height);
+  }
 }
 
 function animate(){
   c.clearRect(0, 0, innerWidth, innerHeight);
   snake.draw();
   snake.update();
-  console.log('test');
+  food.draw();
 }
 
 function init(){
   snake = new Snake(0, 0, 10, 10);
   snake.draw();
-  setInterval(animate, 100);//refreshes 10 times a second with 100
+
+  food = new Food();
+  food.getLocation();
+  food.draw();
+
+  setInterval(animate, 50);//refreshes 10 times a second with 100
 }
 
 init();
