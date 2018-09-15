@@ -1,13 +1,16 @@
 // Set up canvas
 var canvas = document.getElementById("canvas");
-canvas.width = 800;
-canvas.height = 800;
+canvas.width = window.innerWidth/2;
+canvas.height = window.innerHeight/2;
 var c = canvas.getContext("2d");
 
 window.addEventListener('resize', function(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  init();
+  canvas.width = window.innerWidth/2;
+  canvas.height = window.innerHeight/2;
+});
+
+document.getElementById("reset").addEventListener('click', function(){
+  reset();
 });
 
 /*
@@ -28,6 +31,8 @@ document.onkeydown = function(e){
   }else if(key == 37){//left
     snake.dx = -snake.speed;
     snake.dy = 0;
+  }else if(key == 82){//left
+    reset();
   }
 };
 
@@ -40,39 +45,90 @@ function Snake(x, y, width, height){
   this.speed = 10;
   this.dx = this.speed;
   this.dy = 0;
+  //create 3 squares for start snake
   this.body = [];
-  this.len = 1;
-  this.body.push(c.fillRect(this.x, this.y, this.width, this.height));
-  console.log(this.body);
+  this.body.push([30, 10]);
+  this.body.push([10, 10]);
+  this.body.push([20, 10]);
+  this.len = 3;
 
+  //draw each square
+  this.drawSection = function(posx, posy){
+    c.strokeStyle = "#00ff00";
+    c.strokeRect(posx, posy, this.width, this.height); // shortcat to stroke rectangular
+    c.fillRect(posx, posy, this.width, this.height);
+  }
+
+  //draw the whole snek
   this.draw = function(){
     c.fillStyle = "#000";
     for(var i = 0; i < this.len; i++){
+      this.drawSection(this.body[i][0], this.body[i][1]);
     }
   }
 
-  this.grow = function(){
-    this.len++;
-    this.body.push();
+  this.endGame = function(){
+    //check the head vs the other squares
+    var x = this.body[this.body.length-1][0];
+    var y = this.body[this.body.length-1][1];
+    var part = '';
+    for(var i = 0; i < this.body.length-1; i++){
+      part = this.body[i];
+      if(part[0] == x && part[1] == y){
+        return true;
+      }
+    }
+    return false;
+
   }
+
+  this.grow = function(){
+    var head = this.body.slice(this.body.length-1, this.body.length);
+    this.body.push(head);
+    this.len++;
+  }
+
   // changes to object over time
   this.update = function(){
-    this.x += this.dx;
-    this.y += this.dy;
-    if(this.x > canvas.width){
-      this.x = 0;
+    var nextPosition = this.body[0].slice(); //copy head of snake
+    nextPosition[0] += this.dx; //add to the x position
+    nextPosition[1] += this.dy; //add to the x position
+
+    //add the new position to the beginning of the array
+    this.body.unshift(nextPosition);
+    //and remove the last position
+    this.body.pop();
+
+    if(this.endGame()){
+      clearInterval(myInterval);
+      c.font="20px Georgia";
+      c.fillText("Game Over, Score: " + this.body.length, 10, 50);
+      c.fillText("Press R to restart or press the button", 10, 80);
+      document.getElementById("reset").style.display = "inline";
     }
-    if(this.x + this.width < 0){
-      this.x = canvas.width;
+
+    if(this.body[0][0] > canvas.width){
+      this.body[0][0] = 0;
     }
-    if(this.y > canvas.height){
-      this.y = 0;
+    if(this.body[0][0] + this.width < 0){
+      var side = canvas.width;
+      side = side/10;
+      side = Math.floor(side);
+      side = side*10;
+      this.body[0][0] = side;
     }
-    if(this.y < 0){
-      this.y = canvas.height;
+    if(this.body[0][1] > canvas.height){
+      this.body[0][1] = 0;
+    }
+    if(this.body[0][1] < 0){
+      var top = canvas.height;
+      top = top/10;
+      top = Math.floor(top);
+      top = top*10;
+      this.body[0][1] = top;
     }
     //check if the food was eaten
-    if(this.x == food.x && this.y == food.y){
+    if(this.body[0][0] == food.x && this.body[0][1] == food.y){
       //make new food
       this.grow();
       food.getLocation();
@@ -115,15 +171,24 @@ function animate(){
   food.draw();
 }
 
+//game start
 function init(){
+  //hide button
+  document.getElementById("reset").style.display = "none";
+
   snake = new Snake(0, 0, 10, 10);
   snake.draw();
+  console.log(snake.speed);
 
   food = new Food();
   food.getLocation();
   food.draw();
+  myInterval = setInterval(animate, 50);//refreshes 10 times a second with 100
+}
 
-  setInterval(animate, 50);//refreshes 10 times a second with 100
+function reset(){
+  clearInterval(myInterval);
+  init();
 }
 
 init();
