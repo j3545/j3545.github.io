@@ -1,7 +1,7 @@
 var canvas = document.getElementById("box_jump");
 var c = canvas.getContext("2d");
-canvas.width = 800;
-canvas.height = 800;
+canvas.width = 100;
+canvas.height = 100;
 
 document.addEventListener("keydown", function(e){
   if(e.keyCode == 37){
@@ -46,10 +46,6 @@ document.addEventListener("touchmove", function(e){
 // touch end
 document.addEventListener("touchend", function(e){
   mySquare.stop();
-});
-
-document.addEventListener('contextmenu', function(e){
-  e.preventDefault();
 });
 
 document.addEventListener("keyup", function(e){

@@ -1,12 +1,12 @@
 // Set up canvas
 var canvas = document.getElementById("canvas");
-canvas.width = window.innerWidth/2;
-canvas.height = window.innerHeight/2;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 var c = canvas.getContext("2d");
 
 window.addEventListener('resize', function(){
-  canvas.width = window.innerWidth/2;
-  canvas.height = window.innerHeight/2;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
 
 document.getElementById("reset").addEventListener('click', function(){
@@ -20,15 +20,19 @@ document.onkeydown = function(e){
   var key = e.which;
   console.log(key);
   if(key == 38){//up
+    e.preventDefault();
     snake.dy = -snake.speed;
     snake.dx = 0;
   }else if(key == 40){//down
+    e.preventDefault();
     snake.dy = snake.speed;
     snake.dx = 0;
   }else if(key == 39){//right
+    e.preventDefault();
     snake.dx = snake.speed;
     snake.dy = 0;
   }else if(key == 37){//left
+    e.preventDefault();
     snake.dx = -snake.speed;
     snake.dy = 0;
   }else if(key == 82){//left
@@ -101,7 +105,7 @@ function Snake(x, y, width, height){
 
     if(this.endGame()){
       clearInterval(myInterval);
-      c.font="20px Georgia";
+      c.font="Georgia";
       c.fillText("Game Over, Score: " + this.body.length, 10, 50);
       c.fillText("Press R to restart or press the button", 10, 80);
       document.getElementById("reset").style.display = "inline";

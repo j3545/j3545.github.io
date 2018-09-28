@@ -2,9 +2,11 @@
 TODO add slider on the bottom to change background color and speed of rain
 
 */
+let stopAnimation;
+
 
 // Set up canvas
-var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("rain");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var c = canvas.getContext("2d");
@@ -12,6 +14,8 @@ var c = canvas.getContext("2d");
 window.addEventListener('resize', function() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  //clearInterval(myInterval);
+  reset();
   init();
 });
 
@@ -24,11 +28,16 @@ function Drop(x, y, yspeed, length) {
 
   this.draw = function() {
     c.beginPath();
+    c.font="40px Georgia";
+    c.fillStyle = "white";
+    c.fillText("Jesus Quiroz", canvas.width/3, canvas.height/2);
     c.moveTo(this.x, this.y);
     c.lineTo(this.x, this.y + this.length);
     c.strokeStyle = "rgb(138, 43, 226)";
     c.lineWidth = 1;
     c.stroke();
+    //c.endPath();
+
   }
   // changes to object over time
   this.update = function() {
@@ -43,14 +52,24 @@ function Drop(x, y, yspeed, length) {
   }
 }
 
+function reset(){
+  stopAnimation = true;
+}
+
 function animate() {
-  c.clearRect(0, 0, innerWidth, innerHeight);
-  for (var i = 0; i < dropArray.length; i++) {
-    dropArray[i].update();
+  if(!stopAnimation){
+    requestAnimationFrame(animate);
+    c.clearRect(0, 0, innerWidth, innerHeight);
+    for (var i = 0; i < dropArray.length; i++) {
+      dropArray[i].update();
+    }
   }
 }
 
 function init() {
+  stopAnimation = false;
+  var audio = new Audio('Light-rain-and-thunder-sounds.mp3');
+  //audio.play();
   // create droplets
   dropArray = [];
   for (var i = 0; i < innerWidth / 1.2; i++) {
@@ -61,7 +80,8 @@ function init() {
     var z = Math.random * 20;
     dropArray.push(new Drop(x, y, yspeed, length));
   }
-  setInterval(animate, 20);
+  animate();
+  //myInterval = setInterval(animate, 20);
 }
 
 init();
