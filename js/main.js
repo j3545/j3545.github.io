@@ -1,7 +1,7 @@
-var canvas = document.getElementById("box_jump");
+var canvas = document.getElementById("particles");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight/1.3;
 var c = canvas.getContext("2d");
-canvas.width = 100;
-canvas.height = 100;
 
 document.addEventListener("keydown", function(e){
   if(e.keyCode == 37){
@@ -37,12 +37,14 @@ document.addEventListener("touchstart", function(e){
       break;
   }
 });
+
 document.addEventListener("touchmove", function(e){
   console.log(e.target.id);
   if(e.target.id == "left-arrow"){
     mySquare.moveLeft();
   }
 });
+
 // touch end
 document.addEventListener("touchend", function(e){
   mySquare.stop();
@@ -51,24 +53,6 @@ document.addEventListener("touchend", function(e){
 document.addEventListener("keyup", function(e){
   mySquare.stop();
 });//end key up
-
-// button click events
-/*
-$(".arrows #up-arrow").mousedown(function(e){
-  console.log("test");
-  mySquare.jump();
-});
-$(".arrows #right-arrow").mousedown(function(e){
-  mySquare.moveRight();
-});
-$(".arrows #left-arrow").mousedown(function(e){
-  mySquare.moveLeft();
-});
-$(".arrows").mouseup(function(e){
-  mySquare.stop();
-});
-*/
-
 
 function Square(){
   this.x = 10;
@@ -126,21 +110,48 @@ function Platform(){
   }
 }
 
-var mySquare = new Square();
-var platform1 = new Platform();
+function Circle(x,y){
+  this.x = x;
+  this.y = y;
+  this.dx = 1;
+  this.dy = 1;
 
-function start(){
-  requestAnimationFrame(start);
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  this.draw = function(){
+    c.beginPath();
+    c.arc(this.x, this.y, 50, 0, 2*Math.PI);
+    c.strokeStyle = "#fff";
+    c.stroke();
+  }
 
-  c.fillStyle = "white";
-  c.strokeStyle = "black";
+  this.update = function(){
+    this.x += this.dx;
+    this.y += this.dy;
 
-  c.lineWidth = 1;
-  mySquare.update();
-  //platform1.draw();
-  c.fill();
-  c.stroke();
+
+    this.draw();
+  }
+
 }
 
-start();
+let circleArray = [];
+
+let circle = new Circle();
+
+function animate(){
+  requestAnimationFrame(animate);
+  c.clearRect(0, 0, canvas.width, canvas.height);
+  for(let i = 0; i < circleArray.length; i++){
+    console.log('in this');
+    circleArray[i].update();
+  }
+}
+
+function init(){
+  for(let i = 0; i < 10; i++){
+    circleArray[i] = new Circle(i*200, 100);
+  }
+  animate();
+};
+
+
+init();

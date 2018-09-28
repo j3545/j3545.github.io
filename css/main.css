@@ -7,11 +7,12 @@ body{
   text-align:center;
   overflow-x: hidden;
 }
-#rain, #canvas{
-  margin: 0px;
-  background-color: black;
-  -webkit-transition: -webkit-transform 2s ease-in-out;
-  transition: transform 2s ease-in-out;
+#particles{
+  background: #dd7f7c;
+  background: -moz-linear-gradient(45deg, #dd7f7c 0%, #6d0019 96%);
+  background: -webkit-linear-gradient(45deg, #dd7f7c 0%,#6d0019 96%);
+  background: linear-gradient(45deg, #dd7f7c 0%,#6d0019 96%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd7f7c', endColorstr='#6d0019',GradientType=1 );
 }
 nav li{
   line-height: 19px;
@@ -81,5 +82,5 @@ Canvas
   color:white;
 }
 canvas{
-  margin:12px;
+
 }
