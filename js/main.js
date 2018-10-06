@@ -44,6 +44,17 @@ document.addEventListener("keydown", function(e){
     sidebarOpen = true;
   }
 });
+
+document.addEventListener("click", function(e){
+  if(sidebarOpen == false){
+    openNav();
+    sidebarOpen = true;
+  }else if(sidebarOpen == true){
+    closeNav();
+    sidebarOpen = false;
+  }
+});
+
 document.addEventListener("keyup", function(e){
   if(sidebarOpen == true){
     closeNav();
