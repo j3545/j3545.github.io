@@ -5,6 +5,8 @@
 	<title>CSS Zen Garden: The Beauty of CSS Design</title>
 
 	<link rel="stylesheet" media="screen" href="css/style.css">
+	<link rel="stylesheet" media="screen" href="css/main.css">
+	<link rel="stylesheet" href="css/sidebar.css">
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.csszengarden.com/zengarden.xml">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +52,16 @@
 
 <body id="css-zen-garden">
 <div class="page-wrapper">
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="index.html">Home</a>
+		<a href="snake.html">Snake</a>
+		<a href="rain.html">Rain</a>
+		<a href="zen.html">Zen</a>
+	</div>
+
+	<div id="main" style="display:none;">
+	</div>
 
 	<section class="intro" id="zen-intro">
 		<header role="banner">
@@ -193,6 +205,6 @@
 -->
 <div class="extra1" role="presentation"></div><div class="extra2" role="presentation"></div><div class="extra3" role="presentation"></div>
 <div class="extra4" role="presentation"></div><div class="extra5" role="presentation"></div><div class="extra6" role="presentation"></div>
-
+<script src="js/common.js"></script>
 </body>
 </html>
