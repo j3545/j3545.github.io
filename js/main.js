@@ -3,16 +3,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var c = canvas.getContext("2d");
 
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    //document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    //document.getElementById("main").style.marginLeft= "0";
-}
-
 function distance(x1, y1, x2, y2){
   let xDistance = x2-x1;
   let yDistance = y2-y1;
@@ -37,7 +27,6 @@ window.addEventListener("resize", function(event){
   resize();
 });
 
-let sidebarOpen = false;
 document.addEventListener("keydown", function(e){
   if(sidebarOpen == false){
     openNav();
@@ -45,15 +34,7 @@ document.addEventListener("keydown", function(e){
   }
 });
 
-document.addEventListener("click", function(e){
-  if(sidebarOpen == false){
-    openNav();
-    sidebarOpen = true;
-  }else if(sidebarOpen == true){
-    closeNav();
-    sidebarOpen = false;
-  }
-});
+
 
 document.addEventListener("keyup", function(e){
   if(sidebarOpen == true){
