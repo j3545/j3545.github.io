@@ -1,6 +1,6 @@
 var canvas = document.getElementById("particles");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight/1.3;
+canvas.height = window.innerHeight;
 var c = canvas.getContext("2d");
 
 function distance(x1, y1, x2, y2){
@@ -16,6 +16,17 @@ function getRandomBetweenTwoValues(min, max){
   console.log(test);
   return test;
 }
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+}
+
+window.addEventListener("resize", function(event){
+  resize();
+});
+
 /*
 document.addEventListener("keydown", function(e){
   if(e.keyCode == 37){
@@ -78,6 +89,7 @@ function Square(){
   this.hasJumped;
 
   this.draw = function(){
+    //c.fil();
     c.beginPath();
     c.rect(this.x,this.y,this.width, this.height);
   }
@@ -128,21 +140,26 @@ function Circle(x,y){
   this.x = x;
   this.y = y;
   this.radius = 10;
-  this.dx = 1;
-  this.dy = 1;
+  this.dx = getRandomBetweenTwoValues(-0.5,0.5);
+  this.dy = getRandomBetweenTwoValues(-0.5,0.5);
 
   this.draw = function(){
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-    c.strokeStyle = "#fff";
+    c.strokeStyle = "rgba(255, 255, 255, 0.3)";
     c.stroke();
   }
 
   this.update = function(){
     this.x += this.dx;
     this.y += this.dy;
-    if(this.x + this.radius + this.dx >= canvas.width || this.x - this.radius < 0){
-      this.dx *= -1;
+    if(this.x >= canvas.width){
+      this.x = 0;
+      //this.dx = 1;
+    }
+    if(this.x < 0){
+      this.x = canvas.width
+      //this.dx *= -1;
     }
     if(this.y + this.radius + this.dy > canvas.height || this.y - this.radius < 0){
       this.dy *= -1;
@@ -160,6 +177,10 @@ let circle = new Circle();
 function animate(){
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
+  c.font="30px Georgia";
+  c.fillStyle = "rgba(255, 255, 255, 1)";
+  c.textAlign = "center";
+  c.fillText("Jesus Quiroz :)", canvas.width/2, canvas.height/2);
   circleArray.forEach(function(circle){
     circle.update();
   });
@@ -169,7 +190,7 @@ function init(){
   //let x = Math.random() * canvas.width;
   //let y = Math.random() * canvas.height;
   let radius = 10;
-  for(let i = 0; i < 10; i++){
+  for(let i = 0; i < 100; i++){
     console.log('x');
     let x = getRandomBetweenTwoValues(radius, canvas.width-radius);
     console.log('y');
