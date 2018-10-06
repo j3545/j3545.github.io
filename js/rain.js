@@ -1,10 +1,7 @@
 /*
 TODO add slider on the bottom to change background color and speed of rain
-
 */
 let stopAnimation;
-
-
 // Set up canvas
 var canvas = document.getElementById("rain");
 canvas.width = window.innerWidth;
@@ -19,6 +16,16 @@ window.addEventListener('resize', function() {
   init();
 });
 
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    //document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    //document.getElementById("main").style.marginLeft= "0";
+}
+
 // droplet object
 function Drop(x, y, yspeed, length) {
   this.x = x;
@@ -28,9 +35,6 @@ function Drop(x, y, yspeed, length) {
 
   this.draw = function() {
     c.beginPath();
-    c.font="40px Georgia";
-    c.fillStyle = "white";
-    c.fillText("Jesus Quiroz", canvas.width/3, canvas.height/2);
     c.moveTo(this.x, this.y);
     c.lineTo(this.x, this.y + this.length);
     c.strokeStyle = "rgb(138, 43, 226)";
