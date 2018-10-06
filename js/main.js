@@ -221,5 +221,6 @@ function init(){
   animate();
 };
 
-
-init();
+document.addEventListener("DOMContentLoaded", function(event) {
+  init();
+});
