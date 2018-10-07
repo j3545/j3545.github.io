@@ -1,12 +1,12 @@
 // Set up canvas
 var canvas = document.getElementById("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = (window.innerWidth/2);
+canvas.height = (window.innerHeight/2);
 var c = canvas.getContext("2d");
 
 window.addEventListener('resize', function(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth/2;
+  canvas.height = window.innerHeight/2;
 });
 
 document.getElementById("reset").addEventListener('click', function(){

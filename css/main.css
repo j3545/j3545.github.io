@@ -3,7 +3,6 @@
 body{
   margin:0px;
   font-family: Lato, sans-serif;
-  background-color: #aaa;
   text-align:center;
   overflow: hidden;
 }
@@ -28,6 +27,14 @@ body{
   background: linear-gradient(45deg, #4BDED9 0%,#287875 99%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4BDED9', endColorstr='#517F7E',GradientType=1 );
   overflow: hidden;
+}
+body.snake{
+  background-color: #4BDED9;
+}
+.snake-canvas{
+  margin-top:20px;
+  border: 1px solid black;
+  background-color: black;
 }
 
 nav li{
