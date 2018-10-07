@@ -2,6 +2,7 @@
 TODO add slider on the bottom to change background color and speed of rain
 */
 let stopAnimation;
+let myAnimation;
 // Set up canvas
 var canvas = document.getElementById("rain");
 canvas.width = window.innerWidth;
@@ -16,16 +17,6 @@ window.addEventListener('resize', function() {
   init();
 });
 
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    //document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    //document.getElementById("main").style.marginLeft= "0";
-}
-
 // droplet object
 function Drop(x, y, yspeed, length) {
   this.x = x;
@@ -37,7 +28,7 @@ function Drop(x, y, yspeed, length) {
     c.beginPath();
     c.moveTo(this.x, this.y);
     c.lineTo(this.x, this.y + this.length);
-    c.strokeStyle = "rgb(138, 43, 226)";
+    c.strokeStyle = "rgb(255, 255, 225)";
     c.lineWidth = 1;
     c.stroke();
     //c.endPath();
@@ -46,27 +37,31 @@ function Drop(x, y, yspeed, length) {
   // changes to object over time
   this.update = function() {
     this.draw();
-    this.y = this.y + this.yspeed;
-    this.yspeed = this.yspeed + 0.1;
+    this.y += this.yspeed;
+    if(this.yspeed < 10){
+      //console.log('yes');
+      this.yspeed += 0.1;
+    }
+
 
     if (this.y > innerHeight) {
-      this.y = Math.random() * -1000;
-      this.yspeed = (Math.random() * 6) + 4;
+      this.y = getRandomBetweenTwoValues(-100,-1000);
+      this.yspeed = getRandomBetweenTwoValues(0.1,1);
     }
   }
 }
 
 function reset(){
   stopAnimation = true;
+  cancelAnimationFrame(myAnimation);
 }
 
+
 function animate() {
-  if(!stopAnimation){
-    requestAnimationFrame(animate);
-    c.clearRect(0, 0, innerWidth, innerHeight);
-    for (var i = 0; i < dropArray.length; i++) {
-      dropArray[i].update();
-    }
+  myAnimation = requestAnimationFrame(animate);
+  c.clearRect(0, 0, innerWidth, innerHeight);
+  for (var i = 0; i < dropArray.length; i++){
+    dropArray[i].update();
   }
 }
 
@@ -76,16 +71,19 @@ function init() {
   //audio.play();
   // create droplets
   dropArray = [];
-  for (var i = 0; i < innerWidth / 1.2; i++) {
-    var x = (Math.random() * canvas.width);
-    var y = Math.random() * -3000;
-    var yspeed = (Math.random() * 2) + 4;
-    var length = (Math.random() * 10) + 10;
-    var z = Math.random * 20;
+  console.log(dropArray.length);
+  for (let i = 0; i < canvas.width/1.2; i++) {
+    let length = (Math.random() * 10) + 10;
+    let x = (Math.random() * canvas.width);
+    let y = Math.random() * -3000 + -length;
+    let yspeed = getRandomBetweenTwoValues(0.1,1);
+    let z = Math.random * 20;
     dropArray.push(new Drop(x, y, yspeed, length));
   }
   animate();
   //myInterval = setInterval(animate, 20);
 }
 
-init();
+document.addEventListener("DOMContentLoaded", function(event) {
+  init();
+});

@@ -18,3 +18,9 @@ document.addEventListener("click", function(e){
     sidebarOpen = false;
   }
 });
+
+
+function getRandomBetweenTwoValues(min, max){
+  var test = Math.random() * (max-min) + min;
+  return test;
+}

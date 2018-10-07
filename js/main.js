@@ -10,13 +10,6 @@ function distance(x1, y1, x2, y2){
   return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 }
 
-function getRandomBetweenTwoValues(min, max){
-  console.log('in this');
-  var test = Math.random() * (max-min) + min;
-  console.log(test);
-  return test;
-}
-
 function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -175,7 +168,7 @@ function Circle(x,y){
 
 let circleArray = [];
 
-let circle = new Circle();
+//let circle = new Circle();
 
 function animate(){
   requestAnimationFrame(animate);
