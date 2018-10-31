@@ -1,8 +1,10 @@
+/*
+Old Nav Controls
 
 let sidebarOpen = false;
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "10%";
 }
 
 function closeNav() {
@@ -18,9 +20,23 @@ document.addEventListener("click", function(e){
     sidebarOpen = false;
   }
 });
-
+*/
 
 function getRandomBetweenTwoValues(min, max){
   var test = Math.random() * (max-min) + min;
   return test;
+}
+
+/*
+  signature:
+  adds my sig to a 2d context(c)
+  c is a canvas context
+*/
+function signature(){
+  if(typeof c !== 'undefined'){
+    c.font="1vw Georgia";
+    c.fillStyle = "rgba(255, 255, 255, 1)";
+    c.textAlign = "center";
+    c.fillText("Made by Jesus Quiroz :)", window.innerWidth*0.85, window.innerHeight*0.9);
+  }
 }

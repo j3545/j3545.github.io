@@ -1,8 +1,5 @@
 var canvas = document.getElementById("particles");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 var c = canvas.getContext("2d");
-
 function distance(x1, y1, x2, y2){
   let xDistance = x2-x1;
   let yDistance = y2-y1;
@@ -20,20 +17,9 @@ window.addEventListener("resize", function(event){
   resize();
 });
 
-document.addEventListener("keydown", function(e){
-  if(sidebarOpen == false){
-    openNav();
-    sidebarOpen = true;
-  }
-});
-
-
-
-document.addEventListener("keyup", function(e){
-  if(sidebarOpen == true){
-    closeNav();
-    sidebarOpen = false;
-  }
+document.addEventListener("DOMContentLoaded", function(event) {
+  resize();
+  init();
 });
 /*
 document.addEventListener("touchstart", function(e){
@@ -123,7 +109,6 @@ function Square(){
 
 function Platform(){
   this.x = canvas.width-100;
-  ;
   this.y = canvas.height - 40;
   this.width = 50;
   this.height = 10;
@@ -168,15 +153,9 @@ function Circle(x,y){
 
 let circleArray = [];
 
-//let circle = new Circle();
-
 function animate(){
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  c.font="30px Georgia";
-  c.fillStyle = "rgba(255, 255, 255, 1)";
-  c.textAlign = "center";
-  c.fillText("Jesus Quiroz :)", canvas.width/2, canvas.height/2);
   circleArray.forEach(function(circle){
     circle.update();
   });
@@ -187,9 +166,7 @@ function init(){
   //let y = Math.random() * canvas.height;
   let radius = 10;
   for(let i = 0; i < 100; i++){
-    console.log('x');
     let x = getRandomBetweenTwoValues(radius, canvas.width-radius);
-    console.log('y');
     let y = getRandomBetweenTwoValues(radius, canvas.height-radius);
     if(i !== 0){
       for(let j = 0; j < circleArray.length; j++){
@@ -205,7 +182,3 @@ function init(){
   }
   animate();
 };
-
-document.addEventListener("DOMContentLoaded", function(event) {
-  init();
-});
