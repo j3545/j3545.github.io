@@ -21,6 +21,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
   resize();
   init();
 });
+
+document.addEventListener("mousedown", function(event) {
+  alert();
+});
+
+document.addEventListener("touchstart", function(event) {
+
+});
+
 /*
 document.addEventListener("touchstart", function(e){
   var key = e.which;
