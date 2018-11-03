@@ -1,9 +1,11 @@
 var canvas = document.getElementById("particles");
 var c = canvas.getContext("2d");
+let CLICKED = false;
+
+
 function distance(x1, y1, x2, y2){
   let xDistance = x2-x1;
   let yDistance = y2-y1;
-
   return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 }
 
@@ -23,11 +25,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 document.addEventListener("mousedown", function(event) {
-  alert();
+  let myCircle = new Circle(event.x, event.y, "rgba(255, 0, 0, 1.0)");
+  CLICKED = true;
+  circleArray.push(myCircle);
+
 });
 
 document.addEventListener("touchstart", function(event) {
-
+  let myCircle = new Circle(event.x, event.y, "rgba(255, 0, 0, 1.0)");
+  circleArray.push(myCircle);
 });
 
 /*
@@ -80,7 +86,6 @@ function Square(){
   this.hasJumped;
 
   this.draw = function(){
-    //c.fil();
     c.beginPath();
     c.rect(this.x,this.y,this.width, this.height);
   }
@@ -126,30 +131,37 @@ function Platform(){
   }
 }
 
-function Circle(x,y){
+function Circle(x,y, color){
   this.x = x;
   this.y = y;
   this.radius = 10;
   this.dx = getRandomBetweenTwoValues(-0.5,0.5);
   this.dy = getRandomBetweenTwoValues(-0.5,0.5);
+  this.color = color;
+  this.yspeed = 1;
 
   this.draw = function(){
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-    c.strokeStyle = "rgba(255, 255, 255, 0.3)";
+    c.strokeStyle = this.color;
     c.stroke();
   }
 
   this.update = function(){
     this.x += this.dx;
     this.y += this.dy;
+    if(CLICKED == true){
+      this.y += this.yspeed;
+      if(this.yspeed < 10){
+        //console.log('yes');
+        this.yspeed += 0.1;
+      }
+    }
     if(this.x >= canvas.width){
       this.x = 0;
-      //this.dx = 1;
     }
     if(this.x < 0){
-      this.x = canvas.width
-      //this.dx *= -1;
+      this.x = canvas.width;
     }
     if(this.y + this.radius + this.dy > canvas.height || this.y - this.radius < 0){
       this.dy *= -1;
@@ -165,7 +177,12 @@ let circleArray = [];
 function animate(){
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  circleArray.forEach(function(circle){
+  circleArray.forEach(function(circle, index){
+    console.log(index);
+    console.log(circle);
+    if(true){
+
+    }
     circle.update();
   });
 }
@@ -187,7 +204,7 @@ function init(){
       }
     }
 
-    circleArray[i] = new Circle(x, y);
+    circleArray[i] = new Circle(x, y, "rgba(255, 255, 255, 0.3)");
   }
   animate();
 };
