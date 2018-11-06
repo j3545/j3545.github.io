@@ -1,6 +1,7 @@
 var canvas = document.getElementById("particles");
 var c = canvas.getContext("2d");
 let CLICKED = false;
+let player;
 
 
 function distance(x1, y1, x2, y2){
@@ -25,34 +26,42 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 document.addEventListener("mousedown", function(event) {
+  if(typeof player == 'undefined'){
+    player = new Square();
+    platform = new Platform();
+
+
+
+    //remove touch to start
+
+  }
   let myCircle = new Circle(event.x, event.y, "rgba(255, 0, 0, 1.0)");
   CLICKED = true;
   circleArray.push(myCircle);
-
 });
 
 document.addEventListener("touchstart", function(event) {
   let myCircle = new Circle(event.x, event.y, "rgba(255, 0, 0, 1.0)");
   circleArray.push(myCircle);
+  player = new Square();
 });
 
-/*
-document.addEventListener("touchstart", function(e){
+document.addEventListener("keydown", function(e){
   var key = e.which;
   switch(key){
     case 38:// up arrow
-      if(!mySquare.hasJumped){
-        mySquare.jump();
+      if(!player.hasJumped){
+        player.jump();
       }
-      mySquare.hasJumped = true;
+      player.hasJumped = true;
       break;
 
     case 39:// right arrow
-      mySquare.moveRight();
+      player.moveRight();
       break;
 
     case 37:// left arrow
-      mySquare.moveLeft();
+      player.moveLeft();
       break;
 
     default:
@@ -63,19 +72,19 @@ document.addEventListener("touchstart", function(e){
 document.addEventListener("touchmove", function(e){
   console.log(e.target.id);
   if(e.target.id == "left-arrow"){
-    mySquare.moveLeft();
+    player.moveLeft();
   }
 });
 
 // touch end
 document.addEventListener("touchend", function(e){
-  mySquare.stop();
+  player.stop();
 });
 
 document.addEventListener("keyup", function(e){
-  mySquare.stop();
+  player.stop();
 });//end key up
-*/
+
 function Square(){
   this.x = 10;
   this.y = 10;
@@ -86,14 +95,14 @@ function Square(){
   this.hasJumped;
 
   this.draw = function(){
-    c.beginPath();
-    c.rect(this.x,this.y,this.width, this.height);
+    c.fillStyle = "red";
+    c.fillRect(this.x,this.y,this.width,this.height);
   }
 
   //update the objects location
   this.update = function(){
-    this.x += this.dx
     this.draw();
+    this.x += this.dx;
     this.y += this.dy;
     this.dy += 0.1
 
@@ -102,7 +111,7 @@ function Square(){
       this.dy = 0;
       this.hasJumped = false;
     }
-  }//end update
+  }
 
   this.moveRight = function(){
     this.dx = 3;
@@ -111,10 +120,10 @@ function Square(){
     this.dx = -3
   }
   this.jump = function(){
-    if(!mySquare.hasJumped){
+    if(!player.hasJumped){
       this.dy = -3.8
     }
-    mySquare.hasJumped = true;
+    player.hasJumped = true;
   }
   this.stop = function(){
     this.dx = 0;
@@ -127,7 +136,7 @@ function Platform(){
   this.width = 50;
   this.height = 10;
   this.draw = function(){
-    c.rect(this.x,this.y,this.width, this.height);
+    c.rect(this.x, this.y, this.width, this.height);
   }
 }
 
@@ -166,10 +175,8 @@ function Circle(x,y, color){
     if(this.y + this.radius + this.dy > canvas.height || this.y - this.radius < 0){
       this.dy *= -1;
     }
-
     this.draw();
   }
-
 }
 
 let circleArray = [];
@@ -177,14 +184,18 @@ let circleArray = [];
 function animate(){
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  circleArray.forEach(function(circle, index){
-    console.log(index);
-    console.log(circle);
-    if(true){
-
+  for(let i = 0; i < circleArray.length; i++){
+    if(circleArray[i].y > canvas.height){
+      circleArray.splice(i,1);
     }
-    circle.update();
-  });
+    if(typeof circleArray[i] != 'undefined'){
+      circleArray[i].update();
+    }
+  }
+  if(typeof player != 'undefined'){
+    player.update();
+    platform.draw();
+  }
 }
 
 function init(){
@@ -203,7 +214,6 @@ function init(){
         }
       }
     }
-
     circleArray[i] = new Circle(x, y, "rgba(255, 255, 255, 0.3)");
   }
   animate();

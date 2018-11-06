@@ -44,6 +44,20 @@ body{
     user-select: none;
     color:#fff;
 }
+.start{
+  position: absolute;
+  left: 0;
+  width: 320px;
+  text-align: center;
+  top: 90%;
+  left: 50%;
+  margin-left: -160px;
+  margin-top: -160px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  color:#fff;
+}
 .wrapper p a{
   color:#fff;
   text-decoration: none;
