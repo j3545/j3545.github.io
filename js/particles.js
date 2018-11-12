@@ -1,7 +1,15 @@
 var canvas = document.getElementById("particles");
 var c = canvas.getContext("2d");
+let circleArray;
 let CLICKED = false;
 let player;
+let brick;
+let mouse = {
+  x:-100,
+  y:-100
+};
+
+let mousecircle;
 
 
 function distance(x1, y1, x2, y2){
@@ -13,7 +21,6 @@ function distance(x1, y1, x2, y2){
 function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
 }
 
 window.addEventListener("resize", function(event){
@@ -25,12 +32,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
   init();
 });
 
+
+document.addEventListener("touchmove", function(e){
+  console.log(e.target.id);
+  if(e.target.id == "left-arrow"){
+    player.moveLeft();
+  }
+});
+
+// touch end
+document.addEventListener("touchend", function(e){
+  player.stop();
+});
+
+// touch end
+document.addEventListener("mousemove", function(e){
+  mouse.x = e.x;
+  mouse.y = e.y;
+});
+
+
+/*
 document.addEventListener("mousedown", function(event) {
   if(typeof player == 'undefined'){
     player = new Square();
-    platform = new Platform();
-
-
+    brick = new Brick();
 
     //remove touch to start
 
@@ -69,21 +95,14 @@ document.addEventListener("keydown", function(e){
   }
 });
 
-document.addEventListener("touchmove", function(e){
-  console.log(e.target.id);
-  if(e.target.id == "left-arrow"){
-    player.moveLeft();
-  }
-});
-
-// touch end
-document.addEventListener("touchend", function(e){
-  player.stop();
-});
-
 document.addEventListener("keyup", function(e){
   player.stop();
 });//end key up
+
+*/
+
+
+
 
 function Square(){
   this.x = 10;
@@ -130,40 +149,77 @@ function Square(){
   }
 }
 
-function Platform(){
-  this.x = canvas.width-100;
-  this.y = canvas.height - 40;
-  this.width = 50;
+function Brick(){
+  this.x = canvas.width/2;
+  this.y = canvas.height/2;
+  this.width = 100;
   this.height = 10;
   this.draw = function(){
-    c.rect(this.x, this.y, this.width, this.height);
+    c.fillStyle = "blue";
+    c.fillRect(this.x,this.y,this.width,this.height);
   }
 }
 
-function Circle(x,y, color){
+function mouseCircle(x,y){
+  this.x = x;
+  this.y = y;
+  this.draw = function(){
+    c.beginPath();
+    c.arc(this.x, this.y, 100, 0, 2*Math.PI);
+    c.strokeStyle = "rgba(255, 255, 255, 0.05)";
+    c.stroke();
+  }
+  this.update = function(){
+    this.x = mouse.x;
+    this.y = mouse.y;
+    this.draw();
+  }
+}
+
+function Circle(x,y){
   this.x = x;
   this.y = y;
   this.radius = 10;
   this.dx = getRandomBetweenTwoValues(-0.5,0.5);
   this.dy = getRandomBetweenTwoValues(-0.5,0.5);
-  this.color = color;
+  this.color = {
+    a: '255',
+    b: '255',
+    c: '255'
+  }
+  this.style;
   this.yspeed = 1;
+  this.opacity = 0.4;
 
   this.draw = function(){
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-    c.strokeStyle = this.color;
+    c.strokeStyle = this.style;
     c.stroke();
   }
 
   this.update = function(){
     this.x += this.dx;
     this.y += this.dy;
-    if(CLICKED == true){
-      this.y += this.yspeed;
-      if(this.yspeed < 10){
-        //console.log('yes');
-        this.yspeed += 0.1;
+    this.style = "rgba(" + this.color.a + "," + this.color.b + "," + this.color.c + "," + this.opacity +")";
+
+    if(this.x <= mousecircle.x+100 && this.x >= mousecircle.x-100 && this.y <= mousecircle.y+100 && this.y >= mousecircle.y-100 && this.color.a >= 0){
+      //update color
+      //console.log('in this');
+      this.color.a--;
+      this.color.b--;
+      this.color.c--;      
+
+      this.opacity += 0.01;
+    }else{
+      if(this.opacity > 0.4){
+        this.opacity -= 0.01;
+      }
+      if(this.color.a <= 255){
+        console.log('in this');
+        this.color.a += 1;
+        this.color.b += 1;
+        this.color.c += 1;
       }
     }
     if(this.x >= canvas.width){
@@ -179,11 +235,12 @@ function Circle(x,y, color){
   }
 }
 
-let circleArray = [];
+
 
 function animate(){
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
+  mousecircle.update();
   for(let i = 0; i < circleArray.length; i++){
     if(circleArray[i].y > canvas.height){
       circleArray.splice(i,1);
@@ -192,15 +249,12 @@ function animate(){
       circleArray[i].update();
     }
   }
-  if(typeof player != 'undefined'){
-    player.update();
-    platform.draw();
-  }
 }
 
 function init(){
   //let x = Math.random() * canvas.width;
   //let y = Math.random() * canvas.height;
+  circleArray = [];
   let radius = 10;
   for(let i = 0; i < 100; i++){
     let x = getRandomBetweenTwoValues(radius, canvas.width-radius);
@@ -214,7 +268,8 @@ function init(){
         }
       }
     }
-    circleArray[i] = new Circle(x, y, "rgba(255, 255, 255, 0.3)");
+    circleArray[i] = new Circle(x, y);
   }
+  mousecircle = new mouseCircle(mouse.x,mouse.y);
   animate();
 };
