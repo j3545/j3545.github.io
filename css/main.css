@@ -3,84 +3,62 @@
 /*
   Canvas css
 */
-body{
-  margin:0px;
-  overflow: hidden;
+html, body{
+  background: #4BDED9;
+  margin:0px;  
+  height: 100%;
+  font-family: Lato, sans-serif;
 }
-#rain{
-  background: #517F7E;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4BDED9', endColorstr='#517F7E',GradientType=1 );
-  overflow: hidden;
-  -webkit-transition: all 5s; /* For Safari 3.1 to 6.0 */
-  transition: all 5s;
-}
-#rain:hover{
-  background-position: 100px;
-  background: #43C7C2;
-  -webkit-transition: background 5s; /* For Safari 3.1 to 6.0 */
-  transition: background 5s;
-}
-#particles{
-  left: 15%;
+body div.main{
+  margin: 0px;
   background: #4BDED9;
   background: -moz-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
   background: -webkit-linear-gradient(45deg, #4BDED9 0%,#287875 99%);
   background: linear-gradient(45deg, #4BDED9 0%,#287875 99%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4BDED9', endColorstr='#517F7E',GradientType=1 );
+  min-height: 100%;
+  height: 1999px;
+}
+.header{
+  position: fixed;
+  background-color: #27282b;
+  width: 100%;
+}
+
+
+ul{
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  list-style-type: none;
 }
 
-.wrapper {
-    position: absolute;
-    left: 0;
-    width: 320px;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    margin-left: -160px;
-    margin-top: -160px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    color:#fff;
-}
-.start{
-  position: absolute;
-  left: 0;
-  width: 320px;
-  text-align: center;
-  top: 90%;
-  left: 50%;
-  margin-left: -160px;
-  margin-top: -160px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  color:#fff;
-}
-.wrapper p a{
-  color:#fff;
+ul li a{
+  display: block;
   text-decoration: none;
-  font-size: 20px;
+  padding: 0px 50px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 65px;
+  color:#d3cec4;
+  text-transform: uppercase;
 }
-.wrapper p a:hover{
-  color:#ccc;
+ul li a:hover{
+  color:#555;
+  background-color: #eee;
+}
+ul li a:hover{
+
 }
 
-h1 {
-    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 30px;
-    letter-spacing: 9px;
-    text-transform: uppercase;
-    margin: 12px 0;
-    left: 4px;
+.header-title{
+  color:red;
+  float: left;
 }
 
-body.snake{
-  background-color: #4BDED9;
+.main{
+  background-color: #252527;
 }
-.snake-canvas{
-  margin-top:20px;
-  border: 1px solid black;
-  background-color: black;}
+h1{
+  color:#d3cec4;
+}
