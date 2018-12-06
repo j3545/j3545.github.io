@@ -5,17 +5,7 @@ let stopAnimation;
 let myAnimation;
 // Set up canvas
 var canvas = document.getElementById("rain");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 var c = canvas.getContext("2d");
-
-window.addEventListener('resize', function() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  //clearInterval(myInterval);
-  reset();
-  init();
-});
 
 // droplet object
 function Drop(x, y, yspeed, length) {
@@ -51,13 +41,8 @@ function Drop(x, y, yspeed, length) {
   }
 }
 
-function reset(){
-  stopAnimation = true;
-  cancelAnimationFrame(myAnimation);
-}
-
-
 function animate() {
+  console.log("aniumate");
   myAnimation = requestAnimationFrame(animate);
   c.clearRect(0, 0, innerWidth, innerHeight);
   for (var i = 0; i < dropArray.length; i++){
@@ -65,11 +50,9 @@ function animate() {
   }
 }
 
-function init() {
+function init(){
   stopAnimation = false;
   var audio = new Audio('Light-rain-and-thunder-sounds.mp3');
-  //audio.play();
-  // create droplets
   dropArray = [];
   console.log(dropArray.length);
   for (let i = 0; i < canvas.width/1.2; i++) {
@@ -81,9 +64,6 @@ function init() {
     dropArray.push(new Drop(x, y, yspeed, length));
   }
   animate();
-  //myInterval = setInterval(animate, 20);
 }
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  init();
-});
+init();

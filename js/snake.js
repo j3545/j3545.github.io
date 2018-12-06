@@ -1,18 +1,17 @@
 // Set up canvas
-var canvas = document.getElementById("canvas");
-canvas.width = (window.innerWidth/2);
-canvas.height = (window.innerHeight/2);
+var canvas = document.getElementById("snake");
 var c = canvas.getContext("2d");
-
+/*
 window.addEventListener('resize', function(){
   canvas.width = window.innerWidth/2;
   canvas.height = window.innerHeight/2;
 });
-
+*/
+/*
 document.getElementById("reset").addEventListener('click', function(){
   reset();
 });
-
+*/
 /*
 	Player Controls
 */
@@ -36,7 +35,7 @@ document.onkeydown = function(e){
     snake.dx = -snake.speed;
     snake.dy = 0;
   }else if(key == 82){//left
-    reset();
+
   }
 };
 
@@ -169,6 +168,8 @@ function Food(){
 }
 
 function animate(){
+  requestAnimationFrame(animate);
+  console.log("animate");
   c.clearRect(0, 0, innerWidth, innerHeight);
   snake.draw();
   snake.update();
@@ -177,9 +178,8 @@ function animate(){
 
 //game start
 function init(){
+  console.log("test");
   //hide button
-  document.getElementById("reset").style.display = "none";
-
   snake = new Snake(0, 0, 10, 10);
   snake.draw();
   console.log(snake.speed);
@@ -187,12 +187,7 @@ function init(){
   food = new Food();
   food.getLocation();
   food.draw();
-  myInterval = setInterval(animate, 50);//refreshes 10 times a second with 100
-}
-
-function reset(){
-  clearInterval(myInterval);
-  init();
+  animate();
 }
 
 init();
