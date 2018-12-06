@@ -1,6 +1,6 @@
 var canvas = document.getElementById("particles");
 var c = canvas.getContext("2d");
-let circleArray;
+let squareArray;
 let CLICKED = false;
 let player;
 let brick;
@@ -10,6 +10,13 @@ let mouse = {
 };
 
 let mousecircle;
+
+canvas.width = window.innerWidth;
+
+window.addEventListener('resize', function(){
+  canvas.width = window.innerWidth;
+});
+
 
 
 function distance(x1, y1, x2, y2){
@@ -134,8 +141,9 @@ function Circle(x,y){
 
   this.draw = function(){
     c.beginPath();
-    c.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-    c.strokeStyle = this.style;
+
+    c.rect(this.x, this.y, 20,20);
+    c.strokeStyle = "green";
     c.stroke();
   }
 
@@ -182,12 +190,12 @@ function animate(){
 
   mousecircle.update();
 
-  for(let i = 0; i < circleArray.length; i++){
-    if(circleArray[i].y > canvas.height){
-      circleArray.splice(i,1);
+  for(let i = 0; i < squareArray.length; i++){
+    if(squareArray[i].y > canvas.height){
+      squareArray.splice(i,1);
     }
-    if(typeof circleArray[i] != 'undefined'){
-      circleArray[i].update();
+    if(typeof squareArray[i] != 'undefined'){
+      squareArray[i].update();
     }
   }
 
@@ -196,21 +204,21 @@ function animate(){
 function init(){
   //let x = Math.random() * canvas.width;
   //let y = Math.random() * canvas.height;
-  circleArray = [];
+  squareArray = [];
   let radius = 10;
   for(let i = 0; i < 100; i++){
     let x = getRandomBetweenTwoValues(radius, canvas.width-radius);
     let y = getRandomBetweenTwoValues(radius, canvas.height-radius);
     if(i !== 0){
-      for(let j = 0; j < circleArray.length; j++){
-        if(distance(x, y, circleArray[j].x, circleArray[j].y) - radius*2 < 0){
+      for(let j = 0; j < squareArray.length; j++){
+        if(distance(x, y, squareArray[j].x, squareArray[j].y) - radius*2 < 0){
           x = getRandomBetweenTwoValues(radius, canvas.width-radius);
           y = getRandomBetweenTwoValues(radius, canvas.height-radius);
           j = -1
         }
       }
     }
-    circleArray[i] = new Circle(x, y);
+    squareArray[i] = new Circle(x, y);
   }
   mousecircle = new mouseCircle(mouse.x,mouse.y);
   animate();

@@ -1,12 +1,12 @@
 // Set up canvas
 var canvas = document.getElementById("snake");
 var c = canvas.getContext("2d");
-/*
+canvas.width = window.innerWidth/2;
+
 window.addEventListener('resize', function(){
   canvas.width = window.innerWidth/2;
-  canvas.height = window.innerHeight/2;
 });
-*/
+
 /*
 document.getElementById("reset").addEventListener('click', function(){
   reset();
