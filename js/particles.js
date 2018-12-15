@@ -1,5 +1,5 @@
-var canvas = document.getElementById("particles");
-var c = canvas.getContext("2d");
+let canvas = document.getElementById("particles");
+let c = canvas.getContext("2d");
 let squareArray;
 let CLICKED = false;
 let player;
@@ -24,6 +24,14 @@ function distance(x1, y1, x2, y2){
   let yDistance = y2-y1;
   return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 }
+
+document.addEventListener("touchstart", function(e){
+  alert();
+  console.log(e.target.id);
+  if(e.target.id == "left-arrow"){
+    player.moveLeft();
+  }
+});
 
 /*
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -185,6 +193,7 @@ function Circle(x,y){
 
 
 function animate(){
+  console.log('test');
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
 

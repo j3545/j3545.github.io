@@ -6,6 +6,7 @@ html, body{
   box-sizing: border-box;
   min-height: 100%;
   min-width: 100%;
+  overflow-x: hidden;
 }
 *{
   -webkit-transition: 0.7s; /* Safari */
@@ -138,6 +139,8 @@ nav{
     text-align: center;
     background-color: #eee;
     margin: 0px;
+    margin-top: -5px;
+    width: 100%;
     .title{
       font-size: 250%;
       color:#555;
