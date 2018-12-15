@@ -4,7 +4,8 @@
 html, body{
   display: block;
   box-sizing: border-box;
-  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
 }
 *{
   -webkit-transition: 0.7s; /* Safari */
@@ -17,7 +18,7 @@ body{
   background: -webkit-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
   background: linear-gradient(45deg, #4BDED9 0%, #093375 99%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#4BDED9", endColorstr="#517F7E",GradientType=1 );
-  height: 100%;
+  min-height: 100%;
   margin:0px;
   width: 100%;
 
@@ -29,19 +30,44 @@ nav{
   width: 100%;
 
   .header-title{
-    margin-left: 50px;
     padding-top:10px;
+    height: 80px;
     a{
       color:#f1f1f1;
+      float: left;
       font-size: 300%;
+      margin-left: 50px;
       text-decoration: none;
       &:hover{
         color:#aaa;
       }
     }
+    button{
+      float: right;
+      background-color: #27282b;
+      color: white;
+      cursor: pointer;
+      padding: 25px;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      margin-right: 50px;
+      margin-top: 5px;
+      &:hover{
+        background-color: #555;
+      }
+      &:after{
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+      }
+    }
   }
   ul{
-    display: block;
+    clear: both;
     list-style-type: none;
     margin: 0;
     overflow: hidden;
@@ -63,6 +89,9 @@ nav{
         color:#555;
         background-color: #eee;
       }
+      &:after{
+
+      }
     }
   }
 }
@@ -74,8 +103,95 @@ nav{
     padding:50px;
     text-align: center;
   }
-}
+  .about-me{
+    background-color: #eee;
+    clear: both;
+    height: auto;
+    overflow: hidden;
+    padding: 50px 50px;
+    .about-me-image{
+      float: left;
+      margin: 0;
+      width: 30%;
+      img{
+       display: inline;
+       height:200px;
+       border-radius: 50%;
+      }
+    }
+    .about-me-text{
+      display: inline;
+      float: left;
+      line-height: 1.6;
+      width: 60%;
+      text-align: left;
+    }
+  }
+  canvas{
+    display: inline-block;
+    background-color: #000;
+    margin: 0;
+  }
+  .projects{
+    padding-bottom: 40px;
+    display: inline-block;
+    text-align: center;
+    background-color: #eee;
+    margin: 0px;
+    .title{
+      font-size: 250%;
+      color:#555;
+      margin-bottom: 30px;
+      margin-top: 15px;
+      font-family: Roboto Mono,monospace;
+    }
+    .project-image{
+      margin-left: 25px;
+      margin: 25px;
+      display: inline-block;
+      color:#f1f1f1;
+      border-radius:7px;
+      padding-bottom: 10px;
+      width: 40%;
+      .group{
+        img{
+          display: inline-block;
+          height: 250px;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .image-text{
+          background-color: #555;
+          border-radius: 5px;
+          padding: 4px;
+          &:hover{
+            cursor: pointer;
+            background-color:#000;
+            color:#fff;
+          }
+        }
+      }
 
+    }
+  }
+}
+.footer{
+  background-color: #27282b;
+  width: 100%;
+  z-index: 100;
+  height:100px;
+  color: #eee;
+  text-align: center;
+  padding-top: 65px;
+  font-size: 20px;
+  font-family: Lato, sans-serif;
+  a{
+    color: #27282b;
+    text-decoration: none;
+    background-color: #eee;
+    padding: 15px;
+  }
+}
+/*
 .collapsible {
   background-color: #777;
   color: white;
@@ -110,4 +226,4 @@ nav{
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
-}
+}*/
