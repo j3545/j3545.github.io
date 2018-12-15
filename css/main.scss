@@ -1,19 +1,16 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
-html, body {
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+html, body{
   display: block;
   box-sizing: border-box;
   height: 100%;
 }
-
-* {
-  -webkit-transition: 0.7s;
-  /* Safari */
+*{
+  -webkit-transition: 0.7s; /* Safari */
   transition: 0.7s;
 }
-
-body {
+body{
   font-family: Lato, sans-serif;
   font-size: 16px;
   background: -moz-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
@@ -21,59 +18,62 @@ body {
   background: linear-gradient(45deg, #4BDED9 0%, #093375 99%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#4BDED9", endColorstr="#517F7E",GradientType=1 );
   height: 100%;
-  margin: 0px;
+  margin:0px;
   width: 100%;
-}
 
-nav {
+}
+nav{
   background-color: #27282b;
-  display: block;
+  display:block;
   margin: 0px;
   width: 100%;
-}
-nav .header-title {
-  margin-left: 50px;
-  padding-top: 10px;
-}
-nav .header-title a {
-  color: #f1f1f1;
-  font-size: 300%;
-  text-decoration: none;
-}
-nav .header-title a:hover {
-  color: #aaa;
-}
-nav ul {
-  display: block;
-  list-style-type: none;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-}
-nav ul li {
-  text-align: center;
-}
-nav ul li a {
-  color: #f1f1f1;
-  display: block;
-  padding: 30px 0px;
-  font-size: 150%;
-  text-decoration: none;
-  text-align: center;
-  text-transform: uppercase;
-  width: 100%;
-}
-nav ul li a:hover {
-  color: #555;
-  background-color: #eee;
-}
 
-.main .jumbo {
-  color: #f1f1f1;
-  font-size: 350%;
-  margin: 250px 120px;
-  padding: 50px;
-  text-align: center;
+  .header-title{
+    margin-left: 50px;
+    padding-top:10px;
+    a{
+      color:#f1f1f1;
+      font-size: 300%;
+      text-decoration: none;
+      &:hover{
+        color:#aaa;
+      }
+    }
+  }
+  ul{
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    li{
+      text-align: center;
+
+    }
+    li a{
+      color:#f1f1f1;
+      display: block;
+      padding: 30px 0px;
+      font-size: 150%;
+      text-decoration: none;
+      text-align: center;
+      text-transform: uppercase;
+      width:100%;
+      &:hover{
+        color:#555;
+        background-color: #eee;
+      }
+    }
+  }
+}
+.main{
+  .jumbo{
+    color:#f1f1f1;
+    font-size: 350%;
+    margin:250px 120px;
+    padding:50px;
+    text-align: center;
+  }
 }
 
 .collapsible {
@@ -93,7 +93,7 @@ nav ul li a:hover {
 }
 
 .collapsible:after {
-  content: "+";
+  content: '\002B';
   color: white;
   font-weight: bold;
   float: right;
@@ -101,7 +101,7 @@ nav ul li a:hover {
 }
 
 .active:after {
-  content: "−";
+  content: "\2212";
 }
 
 .content {
@@ -111,5 +111,3 @@ nav ul li a:hover {
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
 }
-
-/*# sourceMappingURL=main.css.map */
