@@ -4,70 +4,79 @@
 html, body{
   display: block;
   box-sizing: border-box;
+  margin: 0;
+  padding:0;
+  height: 100%;
+  width:100%;
   min-height: 100%;
   min-width: 100%;
-  overflow-x: hidden;
 }
 *{
+  box-sizing: inherit;
   -webkit-transition: 0.7s; /* Safari */
   transition: 0.7s;
 }
 body{
   font-family: Lato, sans-serif;
-  font-size: 16px;
+  font-size: 62.5%;
   background: -moz-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
   background: -webkit-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
   background: linear-gradient(45deg, #4BDED9 0%, #093375 99%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#4BDED9", endColorstr="#517F7E",GradientType=1 );
+  height:100%;
   min-height: 100%;
   margin:0px;
+  position: absolute;
+  top:0%;
   width: 100%;
-
 }
 nav{
   background-color: #27282b;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   display:block;
   margin: 0px;
+  position: fixed;
+  text-align: center;
+  top:0;
   width: 100%;
 
   .header-title{
-    padding-top:10px;
-    height: 80px;
+    
+    float: left;
+    height: 100%;
+    margin: 1em;
     a{
+      background-color: #27282b;
       color:#f1f1f1;
-      float: left;
-      font-size: 300%;
-      margin-left: 50px;
+      font-size: 2em;
+      height: 40px;
+      line-height: 40px;
       text-decoration: none;
       &:hover{
         color:#aaa;
       }
     }
+  }
+  .nav-button{
+    float: right;
+    height: 100%;
+    margin: 1em;
     button{
-      float: right;
       background-color: #27282b;
+      border: none;
+      border-radius: 5px;
       color: white;
       cursor: pointer;
-      padding: 25px;
-      border: none;
+      padding: 10px;
       text-align: left;
       outline: none;
-      font-size: 15px;
-      margin-right: 50px;
-      margin-top: 5px;
       &:hover{
-        background-color: #555;
-      }
-      &:after{
-        content: '\002B';
-        color: white;
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
+        background-color: #212329;
       }
     }
   }
   ul{
+    background-color: #27282b;
     clear: both;
     list-style-type: none;
     margin: 0;
@@ -97,17 +106,21 @@ nav{
   }
 }
 .main{
+  margin-top:100px;
+  height:100%;
+  width: 100%;
   .jumbo{
     color:#f1f1f1;
-    font-size: 350%;
-    margin:250px 120px;
-    padding:50px;
+    font-size: 2.5em;
+    height:200px;
+    line-height:200px;
     text-align: center;
+    width: 100%;
   }
   .about-me{
     background-color: #eee;
     clear: both;
-    height: auto;
+    height:300px;
     overflow: hidden;
     padding: 50px 50px;
     .about-me-image{
@@ -121,11 +134,10 @@ nav{
       }
     }
     .about-me-text{
-      display: inline;
-      float: left;
+      display: inline;      
+      font-size: 1.5em;
       line-height: 1.6;
-      width: 60%;
-      text-align: left;
+      padding: 30px;
     }
   }
   canvas{

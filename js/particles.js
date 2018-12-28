@@ -26,7 +26,6 @@ function distance(x1, y1, x2, y2){
 }
 
 document.addEventListener("touchstart", function(e){
-  alert();
   console.log(e.target.id);
   if(e.target.id == "left-arrow"){
     player.moveLeft();
