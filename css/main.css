@@ -1,5 +1,24 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+@media only screen and (min-width: 1360px) {
+  .about-me-text {
+    width: 80% !important;
+  }
+
+  .footer {
+    position: absolute;
+  }
+}
+@media only screen and (max-width: 1360px) {
+  .about-me-image {
+    float: none !important;
+    width: 100% !important;
+  }
+
+  .about-me-text {
+    width: 100% !important;
+  }
+}
 html, body {
   display: block;
   box-sizing: border-box;
@@ -21,9 +40,7 @@ html, body {
 body {
   font-family: Lato, sans-serif;
   font-size: 62.5%;
-  background: -moz-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
-  background: -webkit-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
-  background: linear-gradient(45deg, #4BDED9 0%, #093375 99%);
+  background-color: #27282b;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#4BDED9", endColorstr="#517F7E",GradientType=1 );
   height: 100%;
   min-height: 100%;
@@ -42,6 +59,7 @@ nav {
   text-align: center;
   top: 0;
   width: 100%;
+  z-index: 100;
 }
 nav .header-title {
   float: left;
@@ -51,7 +69,7 @@ nav .header-title {
 nav .header-title a {
   background-color: #27282b;
   color: #f1f1f1;
-  font-size: 2em;
+  font-size: 1.5em;
   height: 40px;
   line-height: 40px;
   text-decoration: none;
@@ -103,38 +121,47 @@ nav ul li a:hover {
   background-color: #eee;
 }
 .main {
-  margin-top: 100px;
+  background: -moz-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
+  background: -webkit-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
+  background: linear-gradient(45deg, #4BDED9 0%, #093375 99%);
+  margin-top: 60px;
   height: 100%;
+  position: absolute;
   width: 100%;
 }
 .main .jumbo {
   color: #f1f1f1;
-  font-size: 2.5em;
+  font-size: 2em;
   height: 200px;
-  line-height: 200px;
+  line-height: 1.6;
+  margin-top: 20px;
+  padding: 20px 40px;
+  position: relative;
   text-align: center;
   width: 100%;
 }
 .main .about-me {
   background-color: #eee;
   clear: both;
-  height: 300px;
   overflow: hidden;
-  padding: 50px 50px;
+  padding: 10px 10px;
 }
 .main .about-me .about-me-image {
   float: left;
   margin: 0;
-  width: 30%;
+  padding: 30px 0px;
+  text-align: center;
+  width: 20%;
 }
 .main .about-me .about-me-image img {
+  border-radius: 5px;
   display: inline;
-  height: 200px;
-  border-radius: 50%;
+  height: 300px;
 }
 .main .about-me .about-me-text {
-  display: inline;
-  font-size: 1.5em;
+  display: inline-block;
+  font-size: 150%;
+  font-family: Lato, sans-serif;
   line-height: 1.6;
   padding: 30px;
 }
@@ -189,11 +216,13 @@ nav ul li a:hover {
   width: 100%;
   z-index: 100;
   height: 100px;
+  line-height: 100px;
   color: #eee;
   text-align: center;
-  padding-top: 65px;
+  position: static;
   font-size: 20px;
   font-family: Lato, sans-serif;
+  bottom: 0;
 }
 .footer a {
   color: #27282b;
