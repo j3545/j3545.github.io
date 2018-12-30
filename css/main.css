@@ -6,10 +6,14 @@
   }
 
   .footer {
-    position: absolute;
+    position: absolute !important;
   }
 }
 @media only screen and (max-width: 1360px) {
+  .about-me {
+    padding: 0 !important;
+  }
+
   .about-me-image {
     float: none !important;
     width: 100% !important;
@@ -17,6 +21,10 @@
 
   .about-me-text {
     width: 100% !important;
+  }
+
+  .project-image {
+    margin: 0 !important;
   }
 }
 html, body {
@@ -220,7 +228,7 @@ nav ul li a:hover {
   color: #eee;
   text-align: center;
   position: static;
-  font-size: 20px;
+  font-size: 150%;
   font-family: Lato, sans-serif;
   bottom: 0;
 }
