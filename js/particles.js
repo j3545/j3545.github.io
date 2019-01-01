@@ -11,10 +11,10 @@ let mouse = {
 
 let mousecircle;
 
-canvas.width = window.innerWidth;
+canvas.width = window.innerWidth*0.8;
 
 window.addEventListener('resize', function(){
-  canvas.width = window.innerWidth;
+  canvas.width = window.innerWidth*0.8;
 });
 
 

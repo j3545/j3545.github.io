@@ -3,11 +3,12 @@
 
 @media only screen and (min-width: 1360px) {
   .about-me-text{
+    padding: 100px!important;
     width:80%!important;
   }
-  .footer{
-    position: absolute!important;
-   }
+  .canvas-element{
+    margin:20px;
+  }
 }
 // small screen
 @media only screen and (max-width: 1360px) {
@@ -140,7 +141,7 @@ nav{
     font-size: 2em;
     height:200px;
     line-height:1.6;
-    margin-top: 20px;
+    margin-top: 60px;
     padding: 20px 40px;
     position: relative;
     text-align: center;
@@ -171,6 +172,10 @@ nav{
       padding: 30px;
     }
   }
+  .canvas-projects{
+    background-color: #000;
+    text-align: center;
+  }
   canvas{
     display: inline-block;
     background-color: #000;
@@ -198,15 +203,17 @@ nav{
       color:#f1f1f1;
       border-radius:7px;
       padding-bottom: 10px;
-      width: 40%;
+      
       .group{
+        margin: 10px;
         img{
           display: inline-block;
-          height: 250px;
+          width: 100%;
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
         .image-text{
           background-color: #555;
+          font-size: 120%;
           border-radius: 5px;
           padding: 4px;
           &:hover{
