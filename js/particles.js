@@ -5,8 +5,8 @@ let CLICKED = false;
 let player;
 let brick;
 let mouse = {
-  x:-100,
-  y:-100
+  x:0,
+  y:0
 };
 
 let mousecircle;
@@ -17,6 +17,21 @@ window.addEventListener('resize', function(){
   canvas.width = window.innerWidth*0.8;
 });
 
+canvas.addEventListener("mousemove", function(e){  
+  mouse.x = e.x;
+  mouse.y = e.y;
+  console.log(e);
+});
+
+canvas.addEventListener("touchstart", function(e){
+  console.log(e.touches[0], 'testing');
+  
+});
+
+
+canvas.addEventListener('mousemove', function(e){
+  console.log(e);
+});
 
 
 function distance(x1, y1, x2, y2){
@@ -25,12 +40,7 @@ function distance(x1, y1, x2, y2){
   return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 }
 
-document.addEventListener("touchstart", function(e){
-  console.log(e.target.id);
-  if(e.target.id == "left-arrow"){
-    player.moveLeft();
-  }
-});
+
 
 /*
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -53,10 +63,7 @@ document.addEventListener("touchend", function(e){
 
 
 // touch end
-document.addEventListener("mousemove", function(e){
-  mouse.x = e.x;
-  mouse.y = e.y;
-});
+
 
 function Square(){
   this.x = 10;
@@ -120,8 +127,8 @@ function mouseCircle(x,y){
   this.y = y;
   this.draw = function(){
     c.beginPath();
-    c.arc(this.x, this.y, 100, 0, 2*Math.PI);
-    c.strokeStyle = "rgba(0, 255, 255, 0.05)";
+    c.arc(this.x, this.y, 10, 0, 2*Math.PI);
+    c.strokeStyle = "red";
     c.stroke();
   }
   this.update = function(){
@@ -192,26 +199,15 @@ function Circle(x,y){
 
 
 function animate(){
-  console.log('test');
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-
   mousecircle.update();
-
   for(let i = 0; i < squareArray.length; i++){
-    if(squareArray[i].y > canvas.height){
-      squareArray.splice(i,1);
-    }
-    if(typeof squareArray[i] != 'undefined'){
-      squareArray[i].update();
-    }
+    squareArray[i].update();
   }
-
 }
 
 function init(){
-  //let x = Math.random() * canvas.width;
-  //let y = Math.random() * canvas.height;
   squareArray = [];
   let radius = 10;
   for(let i = 0; i < 100; i++){
