@@ -6,96 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <!--- Got this from https://www.favicon.cc/?action=icon&file_id=910264 --->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
   <title>Jesus Quiroz | Freelancer</title>
 </head>
 <body>
   <nav>
-    <div class="header-title">
-      <a href="https://twitter.com/jedulzeus" target="_blank">Jesus Quiroz | Freelancer</a>
-    </div>
     <div class="nav-button">
-      <button class="collapsible"><i class="fas fa-bars"></i></button>
+      <button class="collapsible" title="Menu"><i class=""><3</i></button>
     </div>
-    <div class="content" id="test" style="display:none;">
-      <ul>
-        <li><a href="https://www.upwork.com/o/profiles/users/_~01dfb098375550eac1/" target="_blank">Upwork</a></li>
-        <li><a href="https://codepen.io/jedulz" target="_blank">CodePen</a></li>
-        <li><a href="https://github.com/jedulz" target="_blank">Github</a></li>
-      </ul>
+    <div class="content" id="test">
     </div>
   </nav>
+  <!---wrapper div-->
   <div class="main">
-    <div class="jumbo">
-      <div>
-        <span>Hi, I'm Jesus Quiroz I create websites!</span>
-        <br>
-        <span>Check out some of my work below!</span>
-      </div>
-    </div>
-    <div class="about-me">
-      <div class="about-me-image">
-        <img src="images/profile.jpg" alt="" >
-      </div>
-      <div class="about-me-text">I am a freelance web developer pursing a degree in computer science. I love working on creating attractive web sites, and improving my skillset as a web developer.
-My goal is to be able to support myself by creating websites for others. I created this site to present the projects I have worked on and as a location to practice creating websites.
-      </div>
-    </div>
-    <div class="canvas-projects">
-      <div class="canvas-element">
-        <canvas id="particles" width="400" height="300"></canvas>
-      </div>
-    </div>
-    <div class="projects">
-      <div class="title">Other Projects</div>
-      <div class="project-image">
-        <div class="group">
-          <img src='https://images.unsplash.com/photo-1510519138101-570d1dca3d66?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-          <div class="image-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </div>
-        </div>
-      </div>
-      <div class="project-image">
-        <div class="group">
-          <img src='https://images.unsplash.com/photo-1521453159160-6b5c58c24591?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-          <div class="image-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </div>
-        </div>
-      </div>
-      <div class="project-image">
-        <div class="group">
-          <img src='https://images.unsplash.com/photo-1516321165247-4aa89a48be28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-          <div class="image-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <a href="https://www.upwork.com/freelancers/~01dfb098375550eac1">Need a website? Click here<3</a>
+    <div>
+      <iframe src="particles.html" frameborder="0"></iframe>
     </div>
   </div>
 </body>
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = document.getElementById("test");
-    console.log(content);
-    if (content.style.display == "none"){
-      content.style.display = 'block';
-    } else {
-      content.style.display = 'none';
-    }
-  });
-}
-</script>
-<script src="js/common.js"></script>
-<script src="js/particles.js"></script>
 </html>

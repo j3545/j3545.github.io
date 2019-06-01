@@ -8,13 +8,13 @@ let mouse = {
   x:0,
   y:0
 };
-
 let mousecircle;
 
 canvas.width = window.innerWidth*0.8;
 
 window.addEventListener('resize', function(){
-  canvas.width = window.innerWidth*0.8;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
 
 canvas.addEventListener("mousemove", function(e){  
@@ -122,28 +122,14 @@ function Brick(){
 }
 */
 
-function mouseCircle(x,y){
-  this.x = x;
-  this.y = y;
-  this.draw = function(){
-    c.beginPath();
-    c.arc(this.x, this.y, 10, 0, 2*Math.PI);
-    c.strokeStyle = "red";
-    c.stroke();
-  }
-  this.update = function(){
-    this.x = mouse.x;
-    this.y = mouse.y;
-    this.draw();
-  }
-}
-
 function Circle(x,y){
   this.x = x;
   this.y = y;
   this.radius = 10;
-  this.dx = getRandomBetweenTwoValues(-0.5,0.5);
-  this.dy = getRandomBetweenTwoValues(-0.5,0.5);
+  this.dx = 5;
+  this.dy = 3;
+  this.height = 20;
+  this.width = 20;
   this.color = {
     a: '0',
     b: '0',
@@ -164,32 +150,10 @@ function Circle(x,y){
   this.update = function(){
     this.x += this.dx;
     this.y += this.dy;
-    this.style = "rgba(" + this.color.a + "," + this.color.b + "," + this.color.c + "," + this.opacity +")";
-
-    if(this.x <= mousecircle.x+100 && this.x >= mousecircle.x-100 && this.y <= mousecircle.y+100 && this.y >= mousecircle.y-100 && this.color.a >= 0){
-
-      this.color.a--;
-      this.color.b--;
-      this.color.c--;
-
-      this.opacity += 0.01;
-    }else{
-      if(this.opacity > 0.4){
-        this.opacity -= 0.01;
-      }
-      if(this.color.a <= 255){
-        this.color.a += 1;
-        this.color.b += 1;
-        this.color.c += 1;
-      }
+    if(this.x + this.width >= canvas.width || this.x < 0){
+      this.dx *= -1;
     }
-    if(this.x >= canvas.width){
-      this.x = 0;
-    }
-    if(this.x < 0){
-      this.x = canvas.width;
-    }
-    if(this.y + this.radius + this.dy > canvas.height || this.y - this.radius < 0){
+    if(this.y + this.height + this.dy > canvas.height || this.y < 0){
       this.dy *= -1;
     }
     this.draw();
@@ -199,9 +163,8 @@ function Circle(x,y){
 
 
 function animate(){
-  requestAnimationFrame(animate);
+  
   c.clearRect(0, 0, canvas.width, canvas.height);
-  mousecircle.update();
   for(let i = 0; i < squareArray.length; i++){
     squareArray[i].update();
   }
@@ -210,21 +173,11 @@ function animate(){
 function init(){
   squareArray = [];
   let radius = 10;
-  for(let i = 0; i < 100; i++){
-    let x = getRandomBetweenTwoValues(radius, canvas.width-radius);
-    let y = getRandomBetweenTwoValues(radius, canvas.height-radius);
-    if(i !== 0){
-      for(let j = 0; j < squareArray.length; j++){
-        if(distance(x, y, squareArray[j].x, squareArray[j].y) - radius*2 < 0){
-          x = getRandomBetweenTwoValues(radius, canvas.width-radius);
-          y = getRandomBetweenTwoValues(radius, canvas.height-radius);
-          j = -1
-        }
-      }
-    }
+  for(let i = 0; i < 3; i++){
+    let x = 0;
+    let y = 0;
     squareArray[i] = new Circle(x, y);
   }
-  mousecircle = new mouseCircle(mouse.x,mouse.y);
-  animate();
+  setInterval(animate, 100);
 };
 init();
