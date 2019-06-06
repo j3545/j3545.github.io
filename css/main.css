@@ -120,3 +120,7 @@ nav ul li a:hover {
 iframe{
   height:500px;
 }
+
+#painting{
+  background-color: red;
+}
