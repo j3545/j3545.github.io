@@ -9,7 +9,7 @@ html, body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   min-height: 100%;
   min-width: 100%;
@@ -20,18 +20,6 @@ html, body {
   -webkit-transition: 0.7s;
   /* Safari */
   transition: 0.7s;
-}
-
-body {
-  font-family: Lato, sans-serif;
-  font-size: 62.5%;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#111", endColorstr="rgb(42, 42, 46);",GradientType=1 );
-  height: 100%;
-  min-height: 100%;
-  margin: 0px;
-  position: absolute;
-  top: 0%;
-  width: 100%;
 }
 
 nav {    
@@ -89,40 +77,35 @@ nav ul li a:hover {
 .main {
   background: -moz-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
   background: -webkit-linear-gradient(45deg, #4BDED9 0%, #287875 99%);
-  background: linear-gradient(45deg, #201f1f 0%, #093375 99%);
-  
-  height: 100%;
+  background: linear-gradient(45deg, #201f1f 0%, #093375 99%);  
+  min-height: 100%;
   position: absolute;
+  text-align: center;
   width: 100%;
-}
-iframe{
-  height:500px;
 }
 
-#painting{
-  background-color: red;
+.main .my-name{
+  color:white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24px;
+  margin: 0;
+  padding: 100px 0;
 }
-.main{
-  height:100%;
-  width: 100%;
+.main .wrapper-apps{ 
+  height: 1000px;
 }
 .main .row-display{
-  border:1px solid red;    
-  height:50%;
   width:100%;
-  position: absolute;
-  top: 50%;
-  padding: 50px;
-  transform: translateY(-50%);
+  margin: 50px 0px;
   text-align: center;
 }
 .main .row-display .canvas{
-  border: 1px solid green;
-  height: 100%;
-  width:20%;
-  margin:0% 3%;
-  display: inline-block;  
+  height:500px;
+  width: 100%;
+  display: inline-block;
+  cursor: none; 
 }
-.particles{
-  border:1px solid pink;
+
+.main .row-display .canvas canvas{
+  background-color: black;
 }
