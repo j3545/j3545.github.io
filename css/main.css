@@ -46,6 +46,10 @@ nav .nav-button button {
   text-align: left;
   outline: none;
 }
+nav .nav-button button a{
+  color: #eee;
+  text-decoration: none;
+}
 nav .nav-button button:hover {
   background-color: #151515;  
   transition: background-color .5s;
