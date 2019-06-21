@@ -23,6 +23,7 @@ for(let i =0; i < canvas.length; i++){
     let mousecircle;
     let player;
     let enemy;
+    let stopGame;
 
     let parent = document.getElementsByClassName("canvas");
     
@@ -117,8 +118,10 @@ function setupSpaceshipGame(canvas){
     let mouse = {
         x: 0,
         y: 0
-      }     
+      }
     let parent = document.getElementsByClassName("canvas");
+    let enemyArray = [];
+
     canvas.width = parent[0].offsetWidth;
     canvas.height = parent[0].offsetHeight;
 
@@ -156,6 +159,20 @@ function setupSpaceshipGame(canvas){
             
 
             this.draw = function(){
+                //draw all the enemies in array
+                for(let i = 0; i<enemyArray.length; i++){
+                    c.fillStyle = this.color;
+                    c.beginPath();
+                    c.rect(this.x, this.y, this.length, this.length);
+                    c.closePath();
+                    c.fill();
+                    c.beginPath();
+                    c.fillStyle = 'black';
+                    c.font="30px serif";
+                    c.fillText(this.currentHealth, this.x+this.length/2, this.y+this.length/2);
+                    c.closePath(); 
+                }
+
                 c.fillStyle = this.color;
                 c.beginPath();
                 c.rect(this.x, this.y, this.length, this.length);
@@ -175,6 +192,9 @@ function setupSpaceshipGame(canvas){
                 this.color = 'red';
                 this.healthPool++;
                 this.currentHealth = this.healthPool;
+                this.dy *= 1.05;
+
+                //add an extra enemy
             }
 
             this.update = function () {
@@ -200,24 +220,23 @@ function setupSpaceshipGame(canvas){
         }
     }
 
+    class Bullet{
+        constructor(length, dx, dy, rotation) {                        
+            this.x = player.x;
+            this.y = player.y;
+            this.length = length;
+            this.damage = 1;            
+            this.dx = dx;
+            this.dy = dy;
+            this.rotation = rotation;
+        }
+    }
+
     /*
         Player creates a player that moves with mouse or by touch on mobile
     */
     class Player {
         constructor(x, y, length) {
-
-            class Bullet{
-                constructor(x, y, length) {
-                    
-                    
-                    this.x = x;
-                    this.y = y;
-                    this.length = length;
-                    this.damage = 1;
-                                        
-                    
-                }
-            }
             this.x = x;
             this.y = y;
             this.length = length;
@@ -240,7 +259,7 @@ function setupSpaceshipGame(canvas){
             this.fired = false;            
 
             //rotates and draws the player
-            this.draw = function () {
+            this.draw = function(){
                 c.save();
                 c.translate(this.x, this.y);
                 c.rotate(45 * Math.PI / 180);
@@ -253,12 +272,17 @@ function setupSpaceshipGame(canvas){
                 //draw every bullet
                 
                 for(let i =0; i < this.bulletArray.length; i++){
-                    this.bulletArray[i].y -= 5;
+                    c.save();
+                    c.translate(this.bulletArray[i].x, this.bulletArray[i].y);
+                    let temp = this.bulletArray[i].rotation;
+                    c.rotate(temp * (Math.PI / 180));
                     c.beginPath();
-                    c.rect(this.bulletArray[i].x - this.bulletArray[i].length/2, this.bulletArray[i].y, this.bulletArray[i].length, this.length);
+                    c.rect(0,0, 10, this.length);
                     c.fillStyle = "white";
                     c.closePath();
                     c.fill();
+                    c.restore();
+                    this.bulletArray[i].y -= 5;
                 }
                 
             };
@@ -269,48 +293,39 @@ function setupSpaceshipGame(canvas){
                 this.draw();                
                             
                 this.fire();
-                
                 //update bullet
                 if(this.bulletArray.length > 0){
                     for(let i =0; i < this.bulletArray.length; i++){
-
-                        //if bullet is past wall
+                        this.bulletArray[i].x += this.bulletArray[i].dx;
+                        this.bulletArray[i].y += this.bulletArray[i].dy;
                         if(this.bulletArray[i].y < 0){
-                            this.bulletArray[i].x = this.x;
-                            this.bulletArray[i].y = this.y;
-                            this.fire();
-                            
-                        }else{
-                            this.bulletArray[i].y -= 13;
-                        }                                                                                                
+                            this.bulletArray.splice(this.bulletArray[i], 1);
+                        }
                     }
-                }
-                
-                
+                }                                
             };
 
             this.hitEnemy = function(bullet){
-                bullet.x = this.x;
-                bullet.y = this.y;
-                this.fire();
-            }
+                let index = this.bulletArray.indexOf(bullet);
+                if (index > -1) {
+                    this.bulletArray.splice(index, 1);
+                }
+            }        
             
             this.fire = function() {
-                let bullet = new Bullet(this.x, this.y, 10);
-                
-                if(this.bulletCount < 2){
-                    console.log('fire',this.bulletArray);
-                    setTimeout(function(){
+                this.bulletCount++;
+                setTimeout(function(){
+                    //length dx dy rotation
+                    let bullet = new Bullet(10, -13, -13, 145);
+                    player.bulletArray.push(bullet);
 
-                        player.bulletArray.push(bullet);
+                    bullet = new Bullet(10, 13, -13, -145);
+                    player.bulletArray.push(bullet);
 
-                    }, 300+200*this.bulletCount);
-                    this.bulletCount++;
-                    
-                }
+                    bullet = new Bullet(10, 0, -13, 0);
+                    player.bulletArray.push(bullet);
+                }, 300*this.bulletCount);
                 
-                
-                                                                
             };
     
         }
@@ -341,11 +356,13 @@ function setupSpaceshipGame(canvas){
     function reset(){
         let length = 20;
         cancelAnimationFrame(animateID);
+        bulletArray = [];
         player = new Player(mouse.x, mouse.y, length);
         enemy = new Enemy(canvas.width/2, -50, 50);
-        enemy.dy = 5;
-        animateId = requestAnimationFrame(animate);
         stopGame = false;
+        animate();
+        console.log(animateId);
+        
     }
 
     function init(){
@@ -353,11 +370,9 @@ function setupSpaceshipGame(canvas){
         mouse.x = canvas.width/2;
         mouse.y = canvas.height/1.2-length/2;
         player = new Player(mouse.x, mouse.y, length);
-        //create enemy
         enemy = new Enemy(canvas.width/2, -50, 50);
-        animateId = requestAnimationFrame(animate);
         stopGame = false;
-        console.log('init');
+        animate();
     };
     init();
 }
