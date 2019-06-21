@@ -3,6 +3,15 @@ function getRandomBetweenTwoValues(min, max){
     return test;
 }
 
+function randomColor(length){
+    let x = Math.floor(256/length);
+    let y = Math.floor(256/length);
+    let z = Math.floor(256/length);
+    let bgColor = "rgb(" + x + "," + y + "," + z + ")";     
+    
+    return bgColor;    
+    }
+
 let canvas = document.getElementById("particles");
 
 
@@ -11,16 +20,10 @@ canvas = document.getElementsByClassName("particles");
 
 
 for(let i =0; i < canvas.length; i++){
-
     let c = canvas[i].getContext("2d");
     let squareArray;
     let CLICKED = false;
-    let brick;
-    let mouse = {
-    x:0,
-    y:0
-    };
-    let mousecircle;
+    let brick;    
     let player;
     let enemy;
     let stopGame;
@@ -37,68 +40,6 @@ for(let i =0; i < canvas.length; i++){
     canvas[i].height = parent[0].offsetHeight;
   });
 
-
-
-
-    function Circle(x,y){
-    this.x = x;
-    this.y = y;
-    this.radius = 10;
-    this.dx = 5;
-    this.dy = 30;
-    this.height = 20;
-    this.width = 20;
-    this.color = {
-        a: '0',
-        b: '0',
-        c: '0'
-    }
-    this.style;
-    this.yspeed = 1;
-    this.opacity = 0.4;
-
-    this.draw = function(){
-        c.beginPath();
-
-        c.rect(this.x, this.y, 20,20);
-        c.strokeStyle = "green";
-        c.stroke();
-    }
-
-    this.update = function(){
-        this.x += this.dx;
-        this.y += this.dy;
-        if(this.x + this.width >= canvas[i].width || this.x < 0){
-        this.dx *= -1;
-        }
-        if(this.y + this.height + this.dy > canvas[i].height || this.y < 0){
-        this.dy *= -1;
-        }
-        this.draw();
-    }
-    }
-
-
-
-    function animate(){
-        c.clearRect(0, 0, canvas[i].width, canvas[i].height);
-        for(let i = 0; i < squareArray.length; i++){
-            squareArray[i].update();
-        }
-        requestAnimationFrame(animate);
-    }
-
-    function init(){
-        squareArray = [];
-        let radius = 10;
-        for(let i = 0; i < 3; i++){
-            let x = 0;
-            let y = 0;
-            squareArray[i] = new Circle(x, y);
-        }
-        var animateID = requestAnimationFrame(animate);
-    };
-    //init();
 }
 
 /*
@@ -145,6 +86,9 @@ function setupSpaceshipGame(canvas){
     canvas.addEventListener('touchmove', function(e){
         mouse.x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
         mouse.y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
+        if(stopGame == true){
+            reset();
+        }
     });
 
     class Enemy {
@@ -153,6 +97,7 @@ function setupSpaceshipGame(canvas){
             this.y = y;
             this.dy = 1;
             this.length = length;
+            
             this.color = 'red';
             this.healthPool = 1;
             this.currentHealth = this.healthPool;
@@ -160,36 +105,23 @@ function setupSpaceshipGame(canvas){
 
             this.draw = function(){
                 //draw all the enemies in array
-                for(let i = 0; i<enemyArray.length; i++){
-                    c.fillStyle = this.color;
-                    c.beginPath();
-                    c.rect(this.x, this.y, this.length, this.length);
-                    c.closePath();
-                    c.fill();
-                    c.beginPath();
-                    c.fillStyle = 'black';
-                    c.font="30px serif";
-                    c.fillText(this.currentHealth, this.x+this.length/2, this.y+this.length/2);
-                    c.closePath(); 
-                }
 
-                c.fillStyle = this.color;
+                c.fillStyle = randomColor(this.currentHealth);
                 c.beginPath();
                 c.rect(this.x, this.y, this.length, this.length);
                 c.closePath();
                 c.fill();
-                c.beginPath();
-                c.fillStyle = 'black';
-                c.font="30px serif";
-                c.fillText(this.currentHealth, this.x+this.length/2, this.y+this.length/2);
-                c.closePath();
+                // c.beginPath();
+                // c.fillStyle = 'black';
+                // c.font="30px serif";
+                // c.fillText(this.currentHealth, this.x+this.length/2, this.y+this.length/2);
+                // c.closePath();
             };
 
             this.upgrade = function () {
                 this.x = getRandomBetweenTwoValues(canvas.width/1.5, canvas.width/3);
                 this.y = y;
                 this.length = length;
-                this.color = 'red';
                 this.healthPool++;
                 this.currentHealth = this.healthPool;
                 this.dy *= 1.05;
@@ -210,6 +142,8 @@ function setupSpaceshipGame(canvas){
                 }                
 
                 if(this.currentHealth <= 0){
+                    player.score++;                    
+                    
                     this.upgrade();
                 }
                 if(this.y+this.length > canvas.height){
@@ -256,10 +190,19 @@ function setupSpaceshipGame(canvas){
 
             this.bulletCount = 0;
             this.bulletArray = [];
-            this.fired = false;            
+            this.fired = false;
+            this.score = 0;
 
             //rotates and draws the player
             this.draw = function(){
+
+                //draw the score
+                c.beginPath();
+                c.fillStyle = 'White';
+                c.font="15px serif"; 
+                c.fillText('Score: ' + this.score, canvas.width/1.1, 20);
+                c.closePath();
+
                 c.save();
                 c.translate(this.x, this.y);
                 c.rotate(45 * Math.PI / 180);
@@ -277,12 +220,15 @@ function setupSpaceshipGame(canvas){
                     let temp = this.bulletArray[i].rotation;
                     c.rotate(temp * (Math.PI / 180));
                     c.beginPath();
-                    c.rect(0,0, 10, this.length);
-                    c.fillStyle = "white";
+                    //c.rect(0,0, 10, this.length);
+                    c.arc(0, 0, 6, 0, 2 * Math.PI);
+                    c.fillStyle = "yellow";
+                    c.strokeStyle = "white";
                     c.closePath();
                     c.fill();
+                    c.stroke();
                     c.restore();
-                    this.bulletArray[i].y -= 5;
+                    
                 }
                 
             };
@@ -322,9 +268,15 @@ function setupSpaceshipGame(canvas){
                     bullet = new Bullet(10, 13, -13, -145);
                     player.bulletArray.push(bullet);
 
+                    bullet = new Bullet(10, 6, -13, -180);
+                    player.bulletArray.push(bullet);
+
+                    bullet = new Bullet(10, -6, -13, -180);
+                    player.bulletArray.push(bullet);
+
                     bullet = new Bullet(10, 0, -13, 0);
                     player.bulletArray.push(bullet);
-                }, 300*this.bulletCount);
+                }, 150*this.bulletCount);
                 
             };
     
