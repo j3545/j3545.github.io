@@ -11,10 +11,10 @@ class Controller {
         }
 
                               
-        this.mouseMove = function(evt) {
-            this.mouse.x = evt.x;
-            this.mouse.y = evt.y;
-        }
+        this.move = function(x, y) {
+            this.mouse.x = x;
+            this.mouse.y = y;
+        }        
       
           this.color = "rgb(" + this.colors[0] + "," + this.colors[1] + "," + this.colors[2] + ")";
       
