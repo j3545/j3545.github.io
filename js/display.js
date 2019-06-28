@@ -1,21 +1,15 @@
 
 class Display {
-    constructor(canvas, player) {
+    constructor(canvas) {
         this.canvas = canvas;
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        this.animate = function(){
-            c.clearRect(0, 0, innerWidth, innerHeight);
-            c.fillStyle = 'red';
-            c.beginPath();
-            c.rect(player.x, player.y, player.length, player.length);
-            c.closePath();
-            c.strokeStyle = 'white';
-            c.fill();
-            c.stroke();
-        }        
-
-        this.render = function () {
-            interval = setInterval(this.animate, 20);
+        this.render = function (canvas, context, color) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, canvas.width, canvas.height);
         }
     }
 }
