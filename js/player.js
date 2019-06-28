@@ -12,6 +12,14 @@ this.Player = function (x, y, len) {
         c.fillText('Is this Game Ready?: ' + this.score, 0, 20);
         c.closePath();
 
+        //draw a light circle around player
+        c.beginPath();
+        //x,y,radius, startAngle, endAngle, counterClockwise        
+        c.arc(this.x, this.y+this.len/2, 60, 0, 2 * Math.PI);
+        c.strokeStyle = 'rgb(255,255,255,0.2)';
+        c.stroke(); 
+        c.closePath();
+
         c.fillStyle = color;
         c.save();
         c.translate(this.x, this.y);
