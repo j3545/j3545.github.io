@@ -6,10 +6,10 @@ class Game {
         this.colors = [0, 0, 0];
         this.shifts = [0, 0, 0];
                               
-        this.update = function(player, c, mouse) {
+        this.update = function(player, ctx, mouse) {
           
           //update color and position
-          player.update(c, this.color);
+          player.update(ctx, this.color);
           player.move(mouse.x, mouse.y);
       
         for (let index = 0; index < 3; index ++) {
@@ -28,7 +28,6 @@ class Game {
             this.colors[index] = color;
             this.shifts[index] = shift;
             // change position
-
         }
       
           this.color = "rgb(" + this.colors[0] + "," + this.colors[1] + "," + this.colors[2] + ")";

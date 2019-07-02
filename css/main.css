@@ -2,3 +2,6 @@
     margin: 0px;
     overflow: hidden;
 }
+canvas{
+    touch-action: none;
+}
