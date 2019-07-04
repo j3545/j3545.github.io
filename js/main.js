@@ -5,8 +5,6 @@ let c = canvas.getContext("2d");
 
 
 let display = new Display(canvas);
-
-let player = new Player(10,10,20);//x,y,length
 let game = new Game();
 let controller = new Controller(canvas);
 
@@ -36,7 +34,7 @@ let interval = setInterval(function(){
     //game objects need to be after display to not be overwritten by background
 
     //idk if i should have a bullet class or put bullet in the game class, maybe subclass?
-    game.update(player, c, controller.mouse);
+    game.update(c, controller.mouse);
 
 
 },1000/60);

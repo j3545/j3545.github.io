@@ -63,8 +63,6 @@ this.Player = function (x, y, len) {
 
     this.update = (c, color) => {
         this.draw(c, color);
-        this.fire();
-        //create bullet;        
                                 
         if(this.bulletArray.length > 0){
             for(let i =0; i < this.bulletArray.length; i++){
@@ -74,9 +72,7 @@ this.Player = function (x, y, len) {
 
                 if(this.bulletArray[i].y < 0 || this.bulletArray[i].x > canvas.width){
                     this.bulletArray.splice(this.bulletArray[i], 1);
-                    this.bulletCount ;
-                    console.log(this.bulletCount, this.bulletArray.length);
-                    
+                    this.bulletCount;
                 }
             }
         }
@@ -99,25 +95,14 @@ this.Player = function (x, y, len) {
 
     this.fire = () => {
         this.bulletCount++;
-        setTimeout(()=>{
+        setInterval(()=>{
             //length dx dy rotation
             let bullet = new Bullet(this.x, this.y, 0, -10);
             this.addBullet(bullet);
-
-            // bullet = new Bullet(10, 13, -13, -145);
-            // this.bulletArray.push(bullet);
-
-            // bullet = new Bullet(10, 6, -13, -180);
-            // this.bulletArray.push(bullet);
-
-            // bullet = new Bullet(10, -6, -13, -180);
-            // this.bulletArray.push(bullet);
-
-            // bullet = new Bullet(10, 0, -13, 0);
-            // this.bulletArray.push(bullet);
-        }, 100*this.bulletCount);
-        
-    x};
+        }, 100);
+    };
+    this.fire();
+    
 
     
 };
