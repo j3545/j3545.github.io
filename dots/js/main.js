@@ -23,7 +23,14 @@ canvas.addEventListener('touchstart', function(e){
     let x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
     let y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
     controller.changeMouse(x, y);
-    checkCollision();
+    game.mouseDown(controller.mouse);
+});
+
+canvas.addEventListener('touchend', function(e){
+    let x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
+    let y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
+    controller.changeMouse(x, y);
+    game.mouseUp(controller.mouse);
 });
 
 window.addEventListener('resize', (e)=>{
