@@ -1,0 +1,14 @@
+canvas{
+    background-color:black;
+    border: 1px solid black;
+    
+}
+body{
+    background-color:#999;
+    margin: 0px;
+    text-align: center;
+    overflow: hidden;
+}
+#type{
+    
+}
