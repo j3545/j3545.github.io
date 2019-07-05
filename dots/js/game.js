@@ -78,6 +78,7 @@ class Game {
                     this.dotArray[i].fillColor = 'red';
                     this.startingDot = this.dotArray[i];
                     this.drawingLine = true;
+                    this.naming = false;
             }else{
                 //clicking somewhere else
                 this.naming = true;
@@ -95,6 +96,7 @@ class Game {
                     // so this dot was hit, change color and create line at dot position
                     this.dotArray[i].fillColor = 'red';
                     this.drawingLine = false;
+                    this.naming = false;
 
                     this.lineArray.push(new Line(this.startingDot.x, this.startingDot.y, this.dotArray[i].x, this.dotArray[i].y, 10));
 
