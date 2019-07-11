@@ -1,5 +1,5 @@
 class Line{
-    constructor(x, y, endX, endY, width){
+    constructor(x, y, endX, endY, width, color){
         this.start = {
             x:x,
             y:y
@@ -10,6 +10,7 @@ class Line{
             y:endY
         }
         this.width = width
+        this.color = color;
     }
 
     draw(ctx){
@@ -17,7 +18,7 @@ class Line{
         ctx.moveTo(this.start.x, this.start.y);
         ctx.lineTo(this.end.x, this.end.y);
         ctx.lineWidth = this.width;
-        ctx.strokeStyle = 'red';
+        ctx.strokeStyle = this.color;
         ctx.stroke();
         ctx.closePath();
         ctx.lineWidth = 0;

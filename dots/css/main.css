@@ -1,6 +1,6 @@
 canvas{
-    background-color:black;
-    border: 1px solid black;
+    background-color:#555;
+    border: 5px solid #333;
     
 }
 body{
@@ -8,7 +8,4 @@ body{
     margin: 0px;
     text-align: center;
     overflow: hidden;
-}
-#type{
-    
 }

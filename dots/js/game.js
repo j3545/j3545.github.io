@@ -1,63 +1,35 @@
 
 class Game {
     constructor() {
-        
-        this.color  = "rgb(0,0,0)";
-        this.colors = [0, 0, 0];
-        this.shifts = [0, 0, 0];
         this.dotArray = [];
         this.lineArray = [];
-        this.drawingLine = false;
-        this.startingDot;
-        this.drawingColor = 'red';
-        this.naming = false;
-        this.nameStartLine = {
-            x:0,
-            y:0
-        };
-        this.nameEndLine = {
-            x:0,
-            y:0
-        };
+        this.startingDot = null;
+        this.player = 0;
+        this.color = 'red';
 
         //add dots here in the constructor to only be called once
         for(let i = 0; i < canvas.width/95; i++){
             for(let j = 0; j<canvas.height/100; j++){
-                this.dotArray.push(new Dot(((i*90)+20), j*95+20, 10));
+                this.dotArray.push(new Dot(((i*90)+20), j*95+20, 30));
             }
         }
     }
 
     update(ctx, mouse){
-        this.draw(ctx);
-
-        if(this.drawingLine){
-            this.drawPath(ctx, this.startingDot, mouse, 10);
-        }
-
-        if(this.naming){
-            console.log('in this');
-            
-            this.drawPath(ctx, this.nameStartLine, mouse, 2);
-        }
-
-        //randomize color every frame
-        for (let index = 0; index < 3; index ++) {
-            let color = this.colors[index];
-            let shift = this.shifts[index];        
-            if (color + shift > 255 || color + shift <= 0) {
-                shift = (shift < 0) ? Math.floor(Math.random() * 5) + 1 : Math.floor(Math.random() * -5) - 1;
+        this.draw(ctx, mouse);
+        if(this.player != this.lineArray.length % 2){
+            this.player = this.lineArray.length % 2;
+            console.log('in this', this.player,);
+            if(this.player == 1){
+                this.color = 'blue';
+            }else{
+                this.color = 'red';
             }
-            color += shift;        
-            this.colors[index] = color;
-            this.shifts[index] = shift;
-            // change position
         }
-        this.color = "rgb(" + this.colors[0] + "," + this.colors[1] + "," + this.colors[2] + ")";
+        
     }
 
-    draw(ctx){
-
+    draw(ctx, mouse){
         //draw dots
         for(let i = 0; i< this.dotArray.length; i++){
             this.dotArray[i].strokeColor = this.color;
@@ -68,53 +40,73 @@ class Game {
         for(let i = 0; i< this.lineArray.length; i++){
             this.lineArray[i].draw(ctx);
         }
+
+        if(this.startingDot != null){
+            this.drawPath(ctx, this.startingDot, mouse, 10);
+        }
     }
     
     mouseDown(mouse){
         for(let i = 0; i< this.dotArray.length; i++){
-            if(mouse.x > this.dotArray[i].x - this.dotArray[i].radius && mouse.x < this.dotArray[i].x + this.dotArray[i].radius &&
-                mouse.y > this.dotArray[i].y - this.dotArray[i].radius && mouse.y < this.dotArray[i].y + this.dotArray[i].radius){
-                    // so this dot was hit, change color and create line at dot position
-                    this.dotArray[i].fillColor = 'red';
+            if(this.hitDot(mouse, this.dotArray[i])){
+                    // so this dot was hit, change color and create line at dot position                    
                     this.startingDot = this.dotArray[i];
-                    this.drawingLine = true;
-                    this.naming = false;
-            }else{
-                //clicking somewhere else
-                this.naming = true;
-                this.nameStartLine.x = mouse.x;
-                this.nameStartLine.y = mouse.y;
+                    this.startingDot.fillColor = this.color;
+                    
             }
         }
     }
 
     mouseUp(mouse){
-        for(let i = 0; i< this.dotArray.length; i++){
-            if(mouse.x > this.dotArray[i].x - this.dotArray[i].radius && mouse.x < this.dotArray[i].x + this.dotArray[i].radius &&
-                mouse.y > this.dotArray[i].y - this.dotArray[i].radius && mouse.y < this.dotArray[i].y + this.dotArray[i].radius){
-
-                    // so this dot was hit, change color and create line at dot position
-                    this.dotArray[i].fillColor = 'red';
-                    this.drawingLine = false;
-                    this.naming = false;
-
-                    this.lineArray.push(new Line(this.startingDot.x, this.startingDot.y, this.dotArray[i].x, this.dotArray[i].y, 10));
-
-            }else{
-                this.nameEndLine.x = mouse.x;
-                this.nameEndLine.y = mouse.y;
-                this.lineArray.push(new Line(this.nameStartLine.x, this.nameStartLine.y, this.nameEndLine.x, this.nameEndLine.y, 2));
-                this.naming = false;
+        if(this.startingDot != null){
+            let found = false;
+            for(let i = 0; i< this.dotArray.length; i++){
+                // so this dot was hit, change color and create line at dot position
+                if(this.hitDot(mouse, this.dotArray[i])){
+                    this.dotArray[i].fillColor = this.color;
+                    this.lineArray.push(new Line(this.startingDot.x, this.startingDot.y, this.dotArray[i].x, this.dotArray[i].y, 10, this.color));
+                    found = true;
+                }
             }
+            //lets check if a line already connects to it
+            for(let i = 0; i< this.lineArray.length; i++){
+                if(this.hitDot(this.lineArray[i].end, this.startingDot)){
+                    found = true;
+                }
+            }
+            if(found == false){
+                this.startingDot.fillColor = 'white';
+            }else{
+                this.startingDot = null;
+            }
+            this.startingDot = null;
         }
     }
 
+    hitDot(mouse, dot){
+        if(mouse.x > dot.x - dot.radius &&
+            mouse.x < dot.x + dot.radius &&
+            mouse.y > dot.y - dot.radius &&
+            mouse.y < dot.y + dot.radius)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Draw Path
+     * takes in two x,y objects and a width and the context to draw it
+     * 
+     * TODO move drawing out of game.js
+     */
     drawPath(ctx, start, end, width){
         ctx.beginPath();
         ctx.moveTo(start.x, start.y);
         ctx.lineTo(end.x, end.y);
         ctx.lineWidth = width;
-        ctx.strokeStyle = this.drawingColor;
+        ctx.strokeStyle = this.color;
         ctx.stroke();
         ctx.closePath();
         ctx.lineWidth = 0;

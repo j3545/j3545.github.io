@@ -6,10 +6,9 @@ class Display {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight/1.2;
 
-        this.render = function (canvas, context, color) {
+        this.render = function (canvas, context) {
             context.clearRect(0, 0, canvas.width, canvas.height);
-            context.fillStyle = 'black';
-            context.fillRect(0, 0, canvas.width, canvas.height);
+            
         }
     }
 }

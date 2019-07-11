@@ -33,12 +33,6 @@ canvas.addEventListener('touchend', function(e){
     game.mouseUp(controller.mouse);
 });
 
-window.addEventListener('resize', (e)=>{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    game.reset();
-});
-
 window.addEventListener('mousedown', (e)=>{
     controller.changeMouse(e.x, e.y);
     //check if hit a dot
@@ -51,9 +45,13 @@ window.addEventListener('mouseup', (e)=>{
     game.mouseUp(controller.mouse);
 });
 
+window.addEventListener('resize', (e)=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    game.reset();
+});
+
 document.getElementById('type').addEventListener('click', (e)=>{
-    
-    
     //if its already naming
     if(document.getElementById('type').innerHTML == 'Naming'){
         game.naming = false;
@@ -62,7 +60,6 @@ document.getElementById('type').addEventListener('click', (e)=>{
         game.naming = true;
         document.getElementById('type').innerHTML = 'Naming';
     }
-    
 });
 
 
@@ -71,11 +68,11 @@ document.getElementById('type').addEventListener('click', (e)=>{
  */
 let interval = setInterval(function(){
     
-    display.render(canvas, c, game.color);
+    display.render(canvas, c);
     //game objects need to be after display to not be overwritten by background
 
     game.update(c, controller.mouse);
 
 
-},1000/60);
+},3000/60);
 
