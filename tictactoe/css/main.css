@@ -1,0 +1,27 @@
+h1, h2{
+	color:#eee;
+	text-align:center;
+}
+
+button{
+	display:inline;
+	height:100px;
+	width:100px;
+	margin:5px;
+	font-size:30px;
+}
+
+.grid-container{
+	text-align:center;
+	margin-top:50px;
+}
+body{
+	background-color: #323232;
+	text-align:center;
+}
+#reset{
+	width:70px;
+	height:40px;
+	border-radius:20px;
+	font-size:20px;
+}
