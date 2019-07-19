@@ -3,22 +3,43 @@
   transition: .5s;
 }
 
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
 body{
     background-color: #121212;
 }
-
-.games-btn{  
-  float: right;
+.main{
+  display: grid;
+}
+.header{
+  background-color: #000;
+  display: inline-block;/*inline-block is used to keep the container to be the height of the inner elements*/
   width: 100%;
-  height: 50px;
+}
+.header .header-logo{  
+  color:#ddd;
+  text-align: left;
+  padding: 20px;  
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.header .button-container{
+  text-align: right;
+  padding: 10px;
+}
+.games-btn{
+  width: 100px;
+  height: 40px;
   /* margin-top: 20%; */
-  border: 5px solid #222;
+  border: 2px solid #222;
   border-radius: 15px;
   /* font-size: 48px; */
   background-color: #555;
   color: #ccc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .games-btn:hover{
   background-color: #656565;
@@ -36,20 +57,49 @@ body{
 .nav div{
   border-bottom:1px solid #111;
   background-color: #333;
-  text-align: left;
-  padding-left: 50px;
   width:100%;
+  padding-top:10px;
+  padding-bottom:10px;
 }
 .nav div:hover{
   background-color: #656565;
 }
 .nav div a{
-  font-size:40px;
+  min-width:100%;
+  display:inline-block;
+  font-size:25px;
   text-decoration: none;
   color:#ccc;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .nav div a:hover{
+   color:#ddd;
+}
+.about-me{
+  width:100%;
+  text-align: center;
+}
+.about-me div{
   color:#ddd;
-  background-color: #656565;
+  text-align: center;
+  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#rain{
+  background:black;
+  -webkit-transition: background-color 200ms linear;
+  -moz-transition: background-color 200ms linear;
+  -o-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+.animation-title{
+  color:#eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding:10px;
+  font-size: 20px;
+  text-align: center;
+}
+.todo{
+  display:none;
 }

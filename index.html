@@ -7,22 +7,34 @@
     </head>
     <body>
         <div class="main">
-            <button class="games-btn" type="button">Show Games</button>
+            <div class="header">
+                <div class="alignleft header-logo">Jesus Quiroz</div>
+                <div class="alignright button-container">
+                    <button class="games-btn" type="button">Show Games</button>
+                </div>
+            </div>
             <div class="nav">
                 <div><a href="tictactoe/index.html">TicTacToe</a></div>
                 <div><a href="spacefall/index.html">SpaceFall</a></div>
                 <div><a href="dots/index.html">Dots</a></div>
             </div>
-
-            <div>Things I want to do:</div>
+            <div class="about-me">
+                <div>Games and Animations I built, I hope you enjoy</div>
+            </div>
             <div>
-                <ul>
-                    <li>
-                        <p>I want to create a game like 1943: battle for midway</p>
-                    </li>
-                </ul>
+                <div class="animation-title">Rain</div>
+                <canvas id="rain"></canvas>
+            </div>
+            <div class="todo">                                
+                <div>Things I want to do:</div>
+                <p>I want to create a game like 1943: battle for midway</p>
+                <p>I want to make my recursive tree animation into a slower animation
+                    probably going to have to use a branch class and only call it on an interval
+                    i want to simulate a tree growing
+                </p>
             </div>
     </div>
     </body>
     <script src="js/main.js"></script>
+    <script src="js/rain.js"></script>
 </html>
