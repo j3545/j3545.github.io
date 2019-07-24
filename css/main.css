@@ -25,6 +25,7 @@ body{
   text-align: left;
   padding: 20px;  
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
 }
 .header .button-container{
   text-align: right;
@@ -32,7 +33,7 @@ body{
 }
 .games-btn{
   width: 100px;
-  height: 40px;
+  height: 50px;
   /* margin-top: 20%; */
   border: 2px solid #222;
   border-radius: 15px;
@@ -40,6 +41,7 @@ body{
   background-color: #555;
   color: #ccc;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
 }
 .games-btn:hover{
   background-color: #656565;
@@ -84,6 +86,7 @@ body{
   text-align: center;
   padding: 40px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 24px;
 }
 #rain{
   background:black;

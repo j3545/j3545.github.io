@@ -19,7 +19,7 @@ canvas.addEventListener('mousemove', function(e){
   mouse.x = mouse.x/80;
 });
 
-window.addEventListener('touchmove', function(e){
+canvas.addEventListener('touchmove', function(e){
   mouse.x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
 	mouse.y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
   mouse.ax = mouse.x;
