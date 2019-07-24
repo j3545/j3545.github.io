@@ -37,7 +37,7 @@ window.addEventListener('resize', function(){
 });
 
 // droplet object
-function Drop(x, y, yspeed, length, direction){
+function Drop(x, y, yspeed, length, direction, color){
   this.x = x;
   this.y = y;
   this.width = 3;
@@ -45,7 +45,9 @@ function Drop(x, y, yspeed, length, direction){
   this.xspeed = 0;
   this.length = length;
   this.direction = direction;
-  this.color = "rgb(138, 43, 226)";
+  this.color  = "rgb(0,0,0)";
+  this.colors = [0, 0, color];
+  this.shift = 1;
   
   this.draw = function(){
     c.beginPath();
@@ -59,6 +61,14 @@ function Drop(x, y, yspeed, length, direction){
   this.update = function(){
     this.draw();
     this.y += this.yspeed;
+    //increment color
+    this.colors[2] += this.shift;
+    if(this.colors[2] >  255 || this.colors[2] < 20){
+      this.shift *= -1;
+    }
+      
+  
+    this.color = "rgb(" + this.colors[0] + "," + this.colors[1] + "," + this.colors[2] + ")";      
     
     this.yspeed = this.yspeed + 0.1;
     this.yspeed += (mouse.y/500);
@@ -69,12 +79,13 @@ function Drop(x, y, yspeed, length, direction){
     
     //okay so we need to have things explode when the tip of the drop hits the ground, which should be this conditional
     if(this.y + this.length + this.yspeed > canvas.height){
-      this.color = "rgb(0, 43, 226)";
+      //this.color = "rgb(0, 43, 226)";
     }
     
-    //if the drop hits the ground
+    //if the drop is past the ground reset
     if(this.y > canvas.height){
-      this.color = "rgb(138, 43, 226)";
+      //reset color
+      //this.color = "rgb(138, 43, 226)";
       this.y = Math.random() * -1000;
       this.yspeed = (Math.random() * 6) + 4;
       this.x = (Math.random() * canvas.width);
@@ -130,8 +141,11 @@ function init(){
     var yspeed = (Math.random() * 2) + 4;
     var length = (Math.random() * 10) + 30;
     var z = Math.random * 20;  
-    var direction = 
-    dropArray.push(new Drop(x, y, yspeed, length, direction));    
+    let rand =  (Math.random() * 255) + 20;
+    console.log(rand);
+    
+    var direction = dropArray.push(new Drop(x, y, yspeed, length, direction, rand));
+    
   }
   interval = setInterval(animate, 20);
 }
