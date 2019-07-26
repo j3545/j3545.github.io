@@ -29,21 +29,29 @@ this.Player = function (x, y, len) {
     this.score = 0;
     this.bulletArray = [];
     this.bulletCount = 0;
+    this.health = 10;
 
     this.draw = (c, color) => {
         //draw the score
         c.beginPath();
         c.fillStyle = 'White';
-        c.font="15px serif"; 
-        c.fillText('Is this Game Ready?: ' + this.score, 0, 20);
+        c.font="15px serif";
+        c.fillText('Score: ' + this.score, 0, 20);
+        c.closePath();
+
+        //draw player health
+        c.beginPath();
+        c.fillStyle = 'White';
+        c.font="15px serif";
+        c.fillText('Player Health: ' + this.health, 0, 40);
         c.closePath();
 
         //draw a light circle around player
         c.beginPath();
-        //x,y,radius, startAngle, endAngle, counterClockwise        
+        //x,y,radius, startAngle, endAngle, counterClockwise
         c.arc(this.x, this.y + this.len/2, 60, 0, 2 * Math.PI);
         c.strokeStyle = 'rgb(255,255,255,0.2)';
-        c.stroke(); 
+        c.stroke();
         c.closePath();
 
         c.fillStyle = color;
@@ -99,7 +107,7 @@ this.Player = function (x, y, len) {
             //length dx dy rotation
             let bullet = new Bullet(this.x, this.y, 0, -10);
             this.addBullet(bullet);
-        }, 100);
+        }, 200);
     };
     this.fire();
     

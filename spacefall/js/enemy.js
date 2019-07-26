@@ -2,48 +2,50 @@ class Enemy {
     constructor(x, y, length){
         this.x = x + 30;
         this.y = y;
-        this.dy = 1;
+        this.dy = 3;
         this.length = length;
         
-        this.color = 'red';
+        this.color = 'blue';
         this.healthPool = 1;
         this.currentHealth = this.healthPool;
+        this.delete = false;
         
 
         this.draw = () =>{
+            //draw the score
+            c.beginPath();
+            c.fillStyle = 'White';
+            c.font="15px serif"; 
+            c.fillText('Health: ' + this.currentHealth, this.x, this.y);
+            c.closePath();
+
             //draw all the enemies in array
-            c.fillStyle = 'red';
+            c.fillStyle = this.color;
             c.beginPath();
             c.rect(this.x, this.y, this.length, this.length);
             c.closePath();
             c.strokeStyle = 'white';
             c.fill();
-            c.stroke();            
+            c.stroke();
         };
 
         this.upgrade = () => {
-            this.x = getRandomBetweenTwoValues(canvas.width/1.5, canvas.width/3);
+            this.x = Math.floor((Math.random() * canvas.width-300) + 100);
             this.y = y;
             this.length = length;
-            this.healthPool++;
             this.currentHealth = this.healthPool;
-            this.dy *= 1.05;
-
-            //add an extra enemy
         }
 
         this.update = ()=>{
             this.y+= this.dy;
             this.draw();
             if(this.currentHealth <= 0){
-                player.score++;
-                this.upgrade();
+                this.delete = true;
             }
             if(this.y + this.length > canvas.height){
-                //gameOver();
-                console.log('gameover');
-                this.y = 0;
-                
+                //delete the object
+
+                // this.y = 0;
             }
         };
 
@@ -53,13 +55,13 @@ class Enemy {
                 if(bulletArray[i].y < this.y + this.length &&
                     bulletArray[i].y > this.y &&
                     bulletArray[i].x + bulletArray[i].length > this.x &&
-                    bulletArray[i].x - bulletArray[i].length < this.x + this.length)
-                    {
+                    bulletArray[i].x - bulletArray[i].length < this.x + this.length){
                         //lose health
                         this.currentHealth -= bulletArray[i].damage;
-                        console.log('hit');
+                        return bulletArray[i];
                     }
             }
+            return false;
         }
     }
 }

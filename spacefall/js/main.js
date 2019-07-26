@@ -8,6 +8,14 @@ let display = new Display(canvas);
 let game = new Game();
 let controller = new Controller(canvas);
 
+document.getElementById('start_button').addEventListener('click', ()=>{
+    //hide start and show canvas
+    document.getElementById('start_screen').style.display = "none";
+    canvas.style.display = "block";
+    //start game
+    init();
+});
+
 canvas.addEventListener('mousemove', (evt)=>{
     controller.move(evt.x, evt.y);
 });
@@ -26,16 +34,20 @@ canvas.addEventListener('touchstart', function(e){
     controller.move(x, y);
 });
 
-
-
-let interval = setInterval(function(){
+canvas.addEventListener('click', ()=>{
+    console.log(game.enemyArray);
     
-    display.render(canvas, c, game.color);
-    //game objects need to be after display to not be overwritten by background
+});
 
-    //idk if i should have a bullet class or put bullet in the game class, maybe subclass?
-    game.update(c, controller.mouse);
-
-
-},1000/60);
-
+function init(){
+    let interval = setInterval(function(){
+    
+        display.render(canvas, c, game.color);
+        //game objects need to be after display to not be overwritten by background
+    
+        //idk if i should have a bullet class or put bullet in the game class, maybe subclass?
+        game.update(c, controller.mouse, canvas);
+    
+    
+    },1000/60);
+}
