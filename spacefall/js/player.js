@@ -1,11 +1,11 @@
-this.Bullet = function(x, y, dx, dy){
+this.Bullet = function(x, y, dx, dy, rotation){
     this.x = x;
     this.y = y;
     this.length = 10;
     this.damage = 1;            
     this.dx = dx;
     this.dy = dy;
-    //this.rotation = rotation;                                              
+    this.rotation = rotation;                                              
 
     this.draw = () => {
         //draw the score
@@ -14,7 +14,9 @@ this.Bullet = function(x, y, dx, dy){
         c.closePath();
         c.strokeStyle = 'white';
         c.fill();
-        c.stroke();            
+        c.stroke();
+        
+        
     };
 
     this.update = () => {
@@ -105,7 +107,11 @@ this.Player = function (x, y, len) {
         this.bulletCount++;
         setInterval(()=>{
             //length dx dy rotation
-            let bullet = new Bullet(this.x, this.y, 0, -10);
+            let bullet = new Bullet(this.x, this.y, 0, -10, -180);
+            this.addBullet(bullet);
+            bullet = new Bullet(this.x, this.y, 5, -10, -180);
+            this.addBullet(bullet);
+            bullet = new Bullet(this.x, this.y, -5, -10, -180);
             this.addBullet(bullet);
         }, 200);
     };

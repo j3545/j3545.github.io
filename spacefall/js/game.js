@@ -12,7 +12,7 @@ class Game {
     for(let i = 0; i<n; i++){
       let length = 50;
       let x = Math.floor((Math.random() * (canvas.width-70-50+1) + 0));
-      let y = Math.floor((Math.random() * -100) + 0);
+      let y = Math.floor((Math.random() * -2000) + 0);
       this.enemyArray.push(new Enemy(x,y,length));
     }
     console.log(this.enemyArray);
