@@ -11,7 +11,6 @@ class CircleCanvas {
     setupCanvas(){
         // Set up circle canvas
         this.canvas = document.getElementById("circles");
-        console.log(this.canvas.getBoundingClientRect());
         
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight/2;
@@ -21,7 +20,6 @@ class CircleCanvas {
     init(){
         this.setupCanvas();
         this.canvas.addEventListener('mousedown', (e)=>{
-            console.log(e);
 
             this.mouse.x = e.x - this.canvas.getBoundingClientRect().left;
             this.mouse.y = e.y - this.canvas.getBoundingClientRect().top;
@@ -34,7 +32,6 @@ class CircleCanvas {
 	        this.mouse.y = e.changedTouches[0].clientY - this.canvas.getBoundingClientRect().top;
             
             this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
-            console.log(this.mouse.x, this.mouse.y);
             
         });
         setInterval(()=>{
@@ -44,7 +41,6 @@ class CircleCanvas {
                 circle.draw(this.ctx);
                 if(circle.radius < 5){
                     circleArray.splice(i,1);
-                    console.log(this.circleArray, "deleted");
                     
                 }
             });
