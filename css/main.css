@@ -63,7 +63,9 @@ body{
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
   
-  touch-action: pan-y
+  touch-action: none;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.25)
 }
 .animation-title{
   color:#eee;
@@ -79,4 +81,6 @@ body{
 .canvas-div{
   height: 100%;
   width: 100%;
+  text-align: center;
+  
 }
