@@ -80,13 +80,28 @@ this.Player = function (x, y, len) {
                 this.bulletArray[i].y += this.bulletArray[i].dy;
                 this.bulletArray[i].update();
 
-                if(this.bulletArray[i].y < 0 || this.bulletArray[i].x > canvas.width){
+                if(this.bulletArray[i].y > canvas.height || this.bulletArray[i].x > canvas.width){
                     this.bulletArray.splice(this.bulletArray[i], 1);
                     this.bulletCount;
                 }
             }
         }
         
+    }
+
+    this.checkCollision = (bulletArray) => {
+        //players bullet hit enemy                
+        for(let i =0; i < bulletArray.length; i++){
+            if(bulletArray[i].y < this.y + this.len &&
+                bulletArray[i].y > this.y &&
+                bulletArray[i].x + bulletArray[i].length > this.x &&
+                bulletArray[i].x - bulletArray[i].length < this.x + this.len){
+                    //lose health
+                    this.health--;
+                    return bulletArray[i];
+                }
+        }
+        return false;
     }
 
     this.addBullet = (bullet) =>{
@@ -109,10 +124,15 @@ this.Player = function (x, y, len) {
             //length dx dy rotation
             let bullet = new Bullet(this.x, this.y, 0, -10, -180);
             this.addBullet(bullet);
-            bullet = new Bullet(this.x, this.y, 5, -10, -180);
-            this.addBullet(bullet);
-            bullet = new Bullet(this.x, this.y, -5, -10, -180);
-            this.addBullet(bullet);
+            if(this.score > 10){
+                bullet = new Bullet(this.x, this.y, 5, -10, -180);
+                this.addBullet(bullet);
+            }
+            if(this.score > 20){
+                bullet = new Bullet(this.x, this.y, -5, -10, -180);
+                this.addBullet(bullet);
+            }
+            
         }, 200);
     };
     this.fire();

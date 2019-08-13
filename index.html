@@ -3,39 +3,59 @@
     <head>
         <title>Jesus Quiroz</title>
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/nav.css">
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     </head>
     <body>
         <div class="main">
-            <div class="header">
-                <div class="alignleft header-logo">Jesus Quiroz</div>
-                <div class="alignright button-container">
-                    <button class="games-btn" type="button">Show Games</button>
-                </div>
-            </div>
-            <div class="nav">
-                <div><a href="tictactoe/index.html">TicTacToe</a></div>
-                <div><a href="spacefall/index.html">SpaceFall</a></div>
-                <div><a href="dots/index.html">Dots</a></div>
-            </div>
-            <div class="about-me">
-                <div>Games and Animations I built
-                    <br>I hope you enjoy</div>w
-            </div>
-            <div>
-                <div class="animation-title">Rain</div>
-                <canvas id="rain"></canvas>
-            </div>
-            <div class="todo">                                
-                <div>Things I want to do:</div>
-                <p>I want to create a game like 1943: battle for midway</p>
-                <p>I want to make my recursive tree animation into a slower animation
-                    probably going to have to use a branch class and only call it on an interval
-                    i want to simulate a tree growing
-                </p>
-            </div>
+        <nav id="menu">
+            <label for="tm" id="toggle-menu">Navigation <span class="drop-icon">▾</span></label>
+            <input type="checkbox" id="tm">
+            <ul class="main-menu clearfix">
+                <li><a href="#">Sample</a></li>
+                <li><a href="#">2-level DD 
+                    <span class="drop-icon">▾</span>
+                    <label title="Toggle Drop-down" class="drop-icon" for="sm1">▾</label>
+                </a>
+                <input type="checkbox" id="sm1">
+                <ul class="sub-menu">
+                    <li><a href="#">Item 2.1</a></li>
+                    <li><a href="#">Item 2.2
+                        <span class="drop-icon">▾</span>
+                        <label title="Toggle Drop-down" class="drop-icon" for="sm2">▾</label>
+                    </a>
+                    <input type="checkbox" id="sm2">
+                    <ul class="sub-menu">
+                        <li><a href="#">Item 2.2.1</a></li>
+                        <li><a href="#">Item 2.2.2</a></li>
+                        <li><a href="#">Item 2.2.3</a></li>
+                    </ul>
+                    </li>
+                    <li><a href="#">Item 3.4</a></li>
+                </ul>
+                </li>
+                <li><a href="#">Another Sample</a></li>
+            </ul>
+        </nav>
+        <div class="about-me">
+        </div>
+        <div>
+            <canvas id="rain"></canvas>
+        </div>
+        <div>
+            <canvas id="circles"></canvas>
+        </div>
+        <div class="todo">                                
+            <div>Things I want to do:</div>
+            <p>I want to create a game like 1943: battle for midway</p>
+            <p>I want to make my recursive tree animation into a slower animation
+                probably going to have to use a branch class and only call it on an interval
+                i want to simulate a tree growing
+            </p>
+        </div>
     </div>
     </body>
-    <script src="js/main.js"></script>
     <script src="js/rain.js"></script>
+    <script src="js/circles.js"></script>
+    <script src="js/main.js"></script>
 </html>

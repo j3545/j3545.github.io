@@ -10,18 +10,18 @@
 	float: right;
 }
 body{
-    background-color: #121212;
+    background-color: #eee;
 }
 .main{
   display: grid;
 }
 .header{
-  background-color: #000;
+  background-color: #eee;
   display: inline-block;/*inline-block is used to keep the container to be the height of the inner elements*/
   width: 100%;
 }
 .header .header-logo{  
-  color:#ddd;
+  color:#555;
   text-align: left;
   padding: 20px;  
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -32,16 +32,17 @@ body{
   padding: 10px;
 }
 .games-btn{
-  width: 100px;
-  height: 50px;
+  width: 150px;
+  height: 80px;
   /* margin-top: 20%; */
   border: 2px solid #222;
-  border-radius: 15px;
+  border-radius: 5px;
   /* font-size: 48px; */
-  background-color: #555;
-  color: #ccc;
+  background-color: #eee;
+  color:#555;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 18px;
+  font-size: 20px;
+  float: right;
 }
 .games-btn:hover{
   background-color: #656565;
@@ -107,3 +108,4 @@ body{
 .todo{
   display:none;
 }
+

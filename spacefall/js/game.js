@@ -15,17 +15,18 @@ class Game {
       let y = Math.floor((Math.random() * -2000) + 0);
       this.enemyArray.push(new Enemy(x,y,length));
     }
-    console.log(this.enemyArray);
-    console.log(this.player.bulletArray);
-    
   }
 
   update(ctx, mouse, canvas) {
     //update color and position
     this.player.update(ctx, this.color);
     this.player.move(mouse.x, mouse.y);
+
+    let enemyHit = new Audio("explosion.mp3");
+    let playerHit = new Audio("playerhit.mp3");
+
     if(this.enemyArray.length < 1){
-      this.createEnemies(10);
+      this.createEnemies(this.player.score/3+5);
     }
     for(let i = 0; i<this.enemyArray.length; i++){
       if(this.enemyArray[i].y > canvas.height || this.enemyArray[i].delete){
@@ -38,6 +39,14 @@ class Game {
           //destroy bullet
           this.player.bulletArray.splice(this.player.bulletArray.indexOf(index), 1);
           this.player.score++;
+          enemyHit.play();
+        }
+        index = this.player.checkCollision(this.enemyArray[i].getBulletArray());
+        if(index){
+          //destroy bullet
+          this.enemyArray[i].bulletArray.splice(this.player.bulletArray.indexOf(index), 1);
+          playerHit.play();
+          
         }
       }
     }        

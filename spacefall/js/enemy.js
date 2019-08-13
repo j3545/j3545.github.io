@@ -1,14 +1,41 @@
+this.Bullet = function(x, y, dx, dy, rotation){
+    this.x = x;
+    this.y = y;
+    this.length = 10;
+    this.damage = 1;            
+    this.dx = dx;
+    this.dy = dy;
+    this.rotation = rotation;                                              
+
+    this.draw = () => {
+        //draw the score
+        c.beginPath();
+        c.rect(this.x, this.y, this.length, this.length);
+        c.closePath();
+        c.strokeStyle = 'white';
+        c.fill();
+        c.stroke();
+        
+        
+    };
+
+    this.update = () => {
+        this.draw();
+    };
+}
+
 class Enemy {
     constructor(x, y, length){
         this.x = x + 30;
         this.y = y;
-        this.dy = 3;
+        this.dy = 5;
         this.length = length;
         
         this.color = 'blue';
         this.healthPool = 1;
         this.currentHealth = this.healthPool;
         this.delete = false;
+        this.bulletArray = [];
         
 
         this.draw = () =>{
@@ -47,6 +74,19 @@ class Enemy {
 
                 // this.y = 0;
             }
+            if(this.bulletArray.length > 0){
+                for(let i =0; i < this.bulletArray.length; i++){
+                    this.bulletArray[i].x += this.bulletArray[i].dx;
+                    this.bulletArray[i].y += this.bulletArray[i].dy;
+                    this.bulletArray[i].update();
+    
+                    if(this.bulletArray[i].y > canvas.height || this.bulletArray[i].x > canvas.width){
+                        this.bulletArray.splice(this.bulletArray[i], 1);
+                        
+                        this.bulletCount;
+                    }
+                }
+            }
         };
 
         this.checkCollision = (bulletArray) => {
@@ -63,5 +103,33 @@ class Enemy {
             }
             return false;
         }
+
+        this.addBullet = (bullet) =>{
+            this.bulletArray.push(bullet);
+            return this.bulletArray;
+        }
+    
+        this.getBulletArray = () => {
+            return this.bulletArray;
+        }
+
+        this.fire = () => {
+            this.bulletCount++;
+            setInterval(()=>{
+                //length dx dy rotation
+                let bullet = new Bullet(this.x, this.y, 0, this.dy+5, -180);
+                this.addBullet(bullet);
+                // if(this.score > 10){
+                //     bullet = new Bullet(this.x, this.y, 5, 10, -180);
+                //     this.addBullet(bullet);
+                // }
+                // if(this.score > 20){
+                //     bullet = new Bullet(this.x, this.y, -5, 10, -180);
+                //     this.addBullet(bullet);
+                // }
+                
+            }, 1000);
+        };
+        this.fire();
     }
 }
