@@ -101,13 +101,19 @@
   }
   
   #menu li, 
-  #toggle-menu, 
-  #menu a {
+  #toggle-menu
+  {
     position: relative;
     display: block;
     color: white;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .125);
-    font-size: 22px;
+    font-size: 2em;
+  }
+  #menu a{
+    position: relative;
+    display: block;
+    color: white;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .125);
   }
 
   #menu li{
@@ -152,7 +158,7 @@
   #menu li label.drop-icon {
     position: absolute;
     right: 1em;
-    top: 0.2em;
+    top: 0.5em;
   }
   
   #menu label.drop-icon, #toggle-menu span.drop-icon {
