@@ -84,9 +84,6 @@ function Drop(x, y, yspeed, length, direction, color){
     //okay so we need to have things explode when the tip of the drop hits the ground, which should be this conditional
     if(this.y + this.length + this.yspeed > canvas.height){
       //this.color = "rgb(0, 43, 226)";
-      let enemyHit = new Audio("explosion.mp3");
-      let playerHit = new Audio("playerhit.mp3");
-      playerHit.play();
     }
     
     //if the drop is past the ground reset
