@@ -11,6 +11,8 @@ class CircleCanvas {
     setupCanvas(){
         // Set up circle canvas
         this.canvas = document.getElementById("circles");
+        console.log(this.canvas.getBoundingClientRect());
+        
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight/2;
         this.ctx = this.canvas.getContext("2d");
