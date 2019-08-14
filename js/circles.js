@@ -32,7 +32,7 @@ class CircleCanvas {
 
     init(){
         this.setupCanvas();
-        this.canvas.addEventListener('mousedown', (e)=>{
+        this.canvas.addEventListener('mousemove', (e)=>{
 
             this.mouse.x = e.x - this.canvas.getBoundingClientRect().left;
             this.mouse.y = e.y - this.canvas.getBoundingClientRect().top;
@@ -40,7 +40,7 @@ class CircleCanvas {
             this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
         });
         this.canvas.addEventListener('touchmove', (e)=>{            
-
+            
             this.mouse.x = e.changedTouches[0].clientX - this.canvas.getBoundingClientRect().left;
 	        this.mouse.y = e.changedTouches[0].clientY - this.canvas.getBoundingClientRect().top;
             
