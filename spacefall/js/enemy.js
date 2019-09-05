@@ -15,8 +15,6 @@ this.Bullet = function(x, y, dx, dy, rotation){
         c.strokeStyle = 'white';
         c.fill();
         c.stroke();
-        
-        
     };
 
     this.update = () => {

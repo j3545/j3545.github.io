@@ -6,6 +6,7 @@ class Game {
       this.shifts = [0, 0, 0];
       this.player = new Player(10,10,20);//x,y,length
       this.enemyArray = [];
+      this.wave = 0;
   }
 
   createEnemies(n){
@@ -26,7 +27,8 @@ class Game {
     let playerHit = new Audio("playerhit.mp3");
 
     if(this.enemyArray.length < 1){
-      this.createEnemies(this.player.score/3+5);
+      this.createEnemies(10);
+      this.wave++;
     }
     for(let i = 0; i<this.enemyArray.length; i++){
       if(this.enemyArray[i].y > canvas.height || this.enemyArray[i].delete){
