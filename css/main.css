@@ -1,3 +1,23 @@
+@media (prefers-color-scheme: dark) {
+  body{ 
+    background-color:  #100e17;
+    color: white;
+  }
+  .todo{
+    color: #2e2f3e;
+    margin: 50px;
+    padding: 50px;
+    background-color: #ddd;
+    font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+  }
+}
+@media (prefers-color-scheme: light) {
+  body{
+    background: white; 
+    color:  #555; 
+  }
+}
+
 *{
   margin:0;
   transition: .5s;
@@ -20,13 +40,10 @@ body {
   text-align: center;
 }
 .todo{
-  color: #2e2f3e;
   margin: 50px;
   padding: 50px;
-  background-color: #ddd;
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
 }
-
 
 @media only screen and (min-width: 600px) {
   body {
