@@ -1,176 +1,42 @@
-@media only screen and (max-width: 64em) and (min-width: 52.01em) {
-    #menu li {
-      width: 33.333%;
-    }
-  
-    #menu .sub-menu li {
-      width: auto;
-    }
-  }
-  
-  @media only screen and (min-width: 52em) {
-    #menu .main-menu {
-      display: block;
-    }
-  
-    #toggle-menu, 
-    #menu label.drop-icon {
-      display: none;
-    }
-  
-    #menu ul span.drop-icon {
-      display: inline-block;
-    }
-  
-    #menu li {
-      float: left;
-      border-width: 0 1px 0 0;
-    }
-  
-    #menu .sub-menu li {
-      float: none;
-    }
-  
-    #menu .sub-menu {
-      border-width: 0;
-      margin: 0;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 12em;
-      z-index: 3000;
-    }
-  
-    #menu .sub-menu, 
-    #menu input[type="checkbox"]:checked + .sub-menu {
-      display: none;
-    }
-  
-    #menu .sub-menu li {
-      border-width: 0 0 1px;
-    }
-  
-    #menu .sub-menu .sub-menu {
-      top: 0;
-      left: 100%;
-    }
-  
-    #menu li:hover > input[type="checkbox"] + .sub-menu {
-      display: block;
-    }
-  }
+nav.menu{
+  border-bottom: 1px solid #201c29;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+nav .logo{
+  font-size: 2.5rem;
+  padding: 20px;
+  width: 5rem;
+}
+nav .title{
+  font-size: 1.2rem;
+  color: #ddd;  
+  padding:10px;
+  text-align: center;
+}
+nav .container {
+  cursor: pointer;
+  padding: 25px;
+  margin-right: 30px;
+}
 
-#menu ul {
-    margin: 0;
-    padding: 0;
-  }
-  
-  #menu .main-menu {
-    display: none;
-  }
-  
-  #tm:checked + .main-menu {
-    display: block;
-  }
-  
-  #menu input[type="checkbox"], 
-  #menu ul span.drop-icon {
-    display: none;
-  }
-  
-  #menu li, 
-  #toggle-menu, 
-  #menu .sub-menu {
-    border-style: solid;
-    border-color: rgba(0, 0, 0, .15);
-  }
-  
-  #menu li, 
-  #toggle-menu {
-    border-width: 0 0 1px;
-  }
-  
-  #menu .sub-menu {
-    background-color: #444;
-    border-width: 1px 1px 0;
-    margin: 0 1em;
-  }
-  
-  #menu .sub-menu li:last-child {
-    border-width: 0;
-  }
-  
-  #menu li, 
-  #toggle-menu
-  {
-    position: relative;
-    display: block;
-    color: white;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, .125);
-    font-size: 2em;
-  }
-  #menu a{
-    position: relative;
-    display: block;
-    color: white;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, .125);
-  }
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #ddd;
+  margin: 6px 0;
+  transition: 0.4s;
+}
 
-  #menu li{
-    width: 100%;
-  }
-  
-  #menu, 
-  #toggle-menu {
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); 
-  }
-  
-  #toggle-menu,
-  #menu a {
-    padding: 1em 1.5em;
-  }
-  
-  #menu a {
-    transition: all .125s ease-in-out;
-    -webkit-transition: all .125s ease-in-out;
-    width: 100%;
-  }
-  
-  #menu a:hover {
-    background-color: white;
-    color: #09c;
-  }
-  
-  #menu .sub-menu {
-    display: none;
-  }
-  
-  #menu input[type="checkbox"]:checked + .sub-menu {
-    display: block;
-  }
-  
-  #menu .sub-menu a:hover {
-    color: #444;
-  }
-  
-  #toggle-menu .drop-icon, 
-  #menu li label.drop-icon {
-    position: absolute;
-    right: 1em;
-    top: 0.5em;
-  }
-  
-  #menu label.drop-icon, #toggle-menu span.drop-icon {
-    border-radius: 20%;
-    width: 2em;
-    height: 2em;
-    text-align: center;
-    color: rgba(255, 255, 255, .75);
-    font-size: 30px;
-    border:1px solid rgba(255, 255, 255, .3);
-  }
-  
-  #menu .drop-icon {
-    line-height: 2;
-  }
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}

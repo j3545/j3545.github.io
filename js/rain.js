@@ -13,32 +13,40 @@ let mouse = {
 let soundOn = false;
 
 canvas.addEventListener('mousemove', function(e){
-  mouse.x = e.x - canvas.getBoundingClientRect().left;
-  mouse.y = e.y - canvas.getBoundingClientRect().top;
-  mouse.ax = mouse.x;
-  mouse.ay = mouse.y;
-  mouse.x -= canvas.width/2;
-  mouse.x = mouse.x/80;
-  soundOn = true;
+  // mouse.x = e.x - canvas.getBoundingClientRect().left;
+  // mouse.y = e.y - canvas.getBoundingClientRect().top;
+  // mouse.ax = mouse.x;
+  // mouse.ay = mouse.y;
+  // mouse.x -= canvas.width/2;
+  // mouse.x = mouse.x/80;
+  // soundOn = true;
 });
 
 canvas.addEventListener('touchmove', function(e){
-  mouse.x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
-	mouse.y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
-  mouse.ax = mouse.x;
-  mouse.ay = mouse.y;
-  mouse.x -= canvas.width/2;
-  mouse.x = mouse.x/80;
-  soundOn = true;
+  // mouse.x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
+	// mouse.y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
+  // mouse.ax = mouse.x;
+  // mouse.ay = mouse.y;
+  // mouse.x -= canvas.width/2;
+  // mouse.x = mouse.x/80;
+  // soundOn = true;
+});
+
+window.addEventListener('load', function(){
+  reset();
 });
 
 
 window.addEventListener('resize', function(){
-  canvas.width = window.innerWidth;
+  canvas.width = window.innerWidth/1.2;
   canvas.height = window.innerHeight/2;
-  init();
-  clearInterval(interval);
 });
+
+function reset(){
+
+  init();
+
+}
 
 // droplet object
 function Drop(x, y, yspeed, length, direction, color){
@@ -162,7 +170,8 @@ function animate(){
   for (var i = 0; i < dropArray.length; i++) {
     dropArray[i].update();
   }
-  createCircleForMouse(mouse);
+  //createCircleForMouse(mouse);
+  requestAnimationFrame(animate);
 }
 
 function init(){
@@ -179,7 +188,8 @@ function init(){
     var direction = dropArray.push(new Drop(x, y, yspeed, length, direction, rand));
     
   }
-  interval = setInterval(animate, 20);
+  //interval = setInterval(animate, 20);
+  requestAnimationFrame(animate);
 }
 
 init();

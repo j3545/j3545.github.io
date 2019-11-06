@@ -30,34 +30,40 @@ class CircleCanvas {
         this.ctx = this.canvas.getContext("2d");
     }
 
+    animate(){
+        this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+        this.circleArray.forEach((circle, i, circleArray) => {
+            circle.update(this.canvas);
+            circle.draw(this.ctx);
+            if(circle.radius < 5){
+                circleArray.splice(i,1);
+                
+            }
+        });
+        requestAnimationFrame(this.animate());
+    }
+
     init(){
         this.setupCanvas();
         this.canvas.addEventListener('mousemove', (e)=>{
 
-            this.mouse.x = e.x - this.canvas.getBoundingClientRect().left;
-            this.mouse.y = e.y - this.canvas.getBoundingClientRect().top;
+            // this.mouse.x = e.x - this.canvas.getBoundingClientRect().left;
+            // this.mouse.y = e.y - this.canvas.getBoundingClientRect().top;
             
-            this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
+            // this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
         });
         this.canvas.addEventListener('touchmove', (e)=>{            
             
-            this.mouse.x = e.changedTouches[0].clientX - this.canvas.getBoundingClientRect().left;
-	        this.mouse.y = e.changedTouches[0].clientY - this.canvas.getBoundingClientRect().top;
+            // this.mouse.x = e.changedTouches[0].clientX - this.canvas.getBoundingClientRect().left;
+	        // this.mouse.y = e.changedTouches[0].clientY - this.canvas.getBoundingClientRect().top;
             
-            this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
+            // this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
             
         });
+        this.animate();
         setInterval(()=>{
-            this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-            this.circleArray.forEach((circle, i, circleArray) => {
-                circle.update(this.canvas);
-                circle.draw(this.ctx);
-                if(circle.radius < 5){
-                    circleArray.splice(i,1);
-                    
-                }
-            });
-        }, 1000/60);
+            this.circleArray.push(new Circle(getRandomInt(0, this.canvas.width), getRandomInt(0, this.canvas.height)));
+        }, 300);
     }
 }
 
