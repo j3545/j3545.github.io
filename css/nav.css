@@ -5,12 +5,12 @@ nav.menu{
   justify-content: space-between;
 }
 nav .logo{
-  font-size: 4rem;
+  font-size: 64px;
   padding: 20px;
   width: 5rem;
 }
 nav .title{
-  font-size: 1.5rem;
+  font-size: 20px;
   color: #ddd;  
   padding:10px;
   text-align: center;
