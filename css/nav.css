@@ -1,23 +1,24 @@
-nav.menu{
+.menu{
   border-bottom: 1px solid #201c29;
   display: flex;
   text-align: center;
   justify-content: space-between;
 }
-nav .logo{
+.logo{
   font-size: 64px;
   padding: 20px;
   width: 5rem;
+  color: darkcyan;
 }
-nav .title{
-  font-size: 20px;
-  color: #ddd;  
+.title{
+  font-size: 24px;
+  color: #ddd;
   padding:10px;
   text-align: center;
 }
-nav .container {
+.container {
   cursor: pointer;
-  padding: 25px;
+  padding: 45px;
   margin-right: 30px;
 }
 
@@ -39,4 +40,48 @@ nav .container {
 .change .bar3 {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 15%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 20px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #eee;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
 }

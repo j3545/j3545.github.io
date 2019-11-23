@@ -1,3 +1,7 @@
+/*
+https://colorhunt.co/palette/163836
+*/
+
 @media (prefers-color-scheme: dark) {
   body{ 
     background-color:  #100e17;
@@ -15,6 +19,11 @@
   body{
     background: white; 
     color:  #555; 
+  }
+}
+@media only screen and (min-width: 600px) {
+  body {
+    background-color: #100e17;
   }
 }
 
@@ -47,8 +56,11 @@ body {
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
 }
 
-@media only screen and (min-width: 600px) {
-  body {
-    background-color: #100e17;
-  }
+.canvas-container{
+  background-color: #29a19c;
+  margin: 50px;
+  padding: 20px;
+}
+canvas{
+  background-color: #a3f7bf;
 }

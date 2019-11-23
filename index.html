@@ -5,24 +5,30 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/nav.css">
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="theme-color" content="#f00">
+        <meta name="theme-color" content="#222831">
     </head>
     <body>
         <div class="main">
             <nav class="menu">
                 <div class="logo">
-                        &#127811;
+                    🍃
                 </div>
                 <div class="title">
                     <h1>Jedulz</h1>
                     <h3>HTML5 Games and Animations</h3>
                 </div>
-                <div class="container" onclick="myFunction(this)">
+                <div class="hamburger container closebtn">
                     <div class="bar1"></div>
                     <div class="bar2"></div>
                     <div class="bar3"></div>
                 </div>
             </nav>
+            <div class="canvas-container">
+                test
+                <canvas height="500">
+
+                </canvas>
+            </div>
             <div class="todo">                                
                 <div>Things I want to do:</div><br>
                 <p>I want to create a game like 1943: battle for midway</p>
@@ -33,6 +39,13 @@
                 </p>
             </div>
         </div>
+        <div id="myNav" class="overlay">
+            <div class="overlay-content">
+              <a href="/back/index.html">Back</a>
+              <a href="#">Fishy</a>
+              <a href="#">Space Shooter</a>
+            </div>
+          </div>
     </body>
     <script src="js/main.js"></script>
 </html>
