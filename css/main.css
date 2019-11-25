@@ -50,13 +50,13 @@ body {
 }
 .todo{
   color: #2e2f3e;
-  margin: 50px;
+  margin: 80px;
   padding: 50px;
   background-color: #ddd;
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
 }
 .canvas-container{
-  margin: 50px;
+  margin: 80px;
 }
 #spaceship{
   background-color: #000;
