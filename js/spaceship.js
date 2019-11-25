@@ -171,7 +171,6 @@ function setupSpaceshipGame(canvas){
                 this.length = length;
                 this.healthPool++;
                 this.currentHealth = this.healthPool;
-                this.dy *= 1.02;
             }
 
             this.update = function () {
@@ -182,7 +181,7 @@ function setupSpaceshipGame(canvas){
                     if(player.bulletArray[i].y < this.y+this.length && player.bulletArray[i].y > this.y && player.bulletArray[i].x + player.bulletArray[i].length > this.x && player.bulletArray[i].x - player.bulletArray[i].length < this.x+this.length){
                         //lose health
                         this.currentHealth -= player.bulletArray[i].damage;
-                        player.hitEnemy(player.bulletArray[i]);                                     
+                        player.hitEnemy(player.bulletArray[i]);
                     }
                 }                
 
@@ -200,11 +199,11 @@ function setupSpaceshipGame(canvas){
     }
 
     class Bullet{
-        constructor(length, dx, dy, rotation) {                        
+        constructor(length, dx, dy, rotation, damage){
             this.x = player.x;
             this.y = player.y;
             this.length = length;
-            this.damage = 1;            
+            this.damage = damage;
             this.dx = dx;
             this.dy = dy;
             this.rotation = rotation;
@@ -231,12 +230,13 @@ function setupSpaceshipGame(canvas){
             this.style;
             this.yspeed = 1;
             this.opacity = 0.4;
-            this.bulletSpeed = 1.1;            
-
+            this.bulletSpeed = 1.1;
             this.bulletCount = 0;
             this.bulletArray = [];
             this.fired = false;
             this.score = 0;
+            this.changed = false;
+            this.damage = 1;
 
             //rotates and draws the player
             this.draw = function(){
@@ -244,8 +244,15 @@ function setupSpaceshipGame(canvas){
                 //draw the score
                 c.beginPath();
                 c.fillStyle = 'White';
-                c.font="15px serif"; 
+                c.font="15px serif";
                 c.fillText('Score: ' + this.score, canvas.width-100, 20);
+                c.closePath();
+
+                //draw the player damage
+                c.beginPath();
+                c.fillStyle = 'White';
+                c.font="15px serif"; 
+                c.fillText('Damage: ' + this.damage, canvas.width-100, 40);
                 c.closePath();
 
                 c.save();
@@ -278,7 +285,7 @@ function setupSpaceshipGame(canvas){
                 
             };
 
-            this.update = function () {
+            this.update = function(){
                 this.x = mouse.x;
                 this.y = mouse.y;
                 this.draw();                
@@ -294,6 +301,17 @@ function setupSpaceshipGame(canvas){
                         }
                     }
                 }
+
+                //check score
+                if(this.score % 10 == 0 && this.score != 0 && !this.changed){
+                    this.changed = true;
+
+                    //this should only happen once
+                    this.damage += 1;
+
+                }else{
+                    this.changed = false;
+                }
             };
 
             this.hitEnemy = function(bullet){
@@ -307,19 +325,20 @@ function setupSpaceshipGame(canvas){
                 this.bulletCount++;
                 setTimeout(function(){
                     //length dx dy rotation
-                    let bullet = new Bullet(10, -13, -13, 145);
+                    let bullet = new Bullet(10, -13, -13, 145, player.damage);
+                    
                     player.bulletArray.push(bullet);
 
-                    bullet = new Bullet(10, 13, -13, -145);
+                    bullet = new Bullet(10, 13, -13, -145, player.damage);
                     player.bulletArray.push(bullet);
 
-                    bullet = new Bullet(10, 6, -13, -180);
+                    bullet = new Bullet(10, 6, -13, -180, player.damage);
                     player.bulletArray.push(bullet);
 
-                    bullet = new Bullet(10, -6, -13, -180);
+                    bullet = new Bullet(10, -6, -13, -180, player.damage);
                     player.bulletArray.push(bullet);
 
-                    bullet = new Bullet(10, 0, -13, 0);
+                    bullet = new Bullet(10, 0, -13, 0, player.damage);
                     player.bulletArray.push(bullet);
                 }, 150);
                 
@@ -364,8 +383,7 @@ function setupSpaceshipGame(canvas){
     }
 
     function gameOver(){
-        cancelAnimationFrame(animateID);
-        stopGame = true;
+        //stopGame = true;
         c.beginPath();
         c.fillStyle = 'White';
         c.font="50px sans-serif";
@@ -380,9 +398,6 @@ function setupSpaceshipGame(canvas){
         player = new Player(mouse.x, mouse.y, length);
         enemy = new Enemy(canvas.width/2, -50, 50);
         stopGame = false;
-        animate();
-        console.log(animateId);
-        
     }
 
     function init(){
