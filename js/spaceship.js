@@ -9,8 +9,17 @@ function randomColor(length){
     let z = Math.floor(256/length);
     let bgColor = "rgb(" + x + "," + y + "," + z + ")";     
     
-    return bgColor;    
-    }
+    return bgColor;
+}
+
+function rainbowColor(){
+    let x = getRandomBetweenTwoValues(0, 255);
+    let y = getRandomBetweenTwoValues(0, 255);
+    let z = getRandomBetweenTwoValues(0, 255);
+    let bgColor = "rgb(" + x + "," + y + "," + z + ")";     
+    
+    return bgColor;
+}
 
 let canvas = document.getElementById("spaceship");
 
@@ -82,8 +91,7 @@ function setupSpaceshipGame(canvas){
             this.y = y;
             this.dx = dx;
             this.dy = dy;
-            this.color = "rgb(255, 0, 0)";
-            this.colors = [255,255,255];
+            this.colors = [getRandomBetweenTwoValues(0, 255), getRandomBetweenTwoValues(0, 255), getRandomBetweenTwoValues(0, 255)];
         }
     
         draw(){
@@ -122,7 +130,7 @@ function setupSpaceshipGame(canvas){
             this.x += this.dx;
             this.y += this.dy;
             for(let i =0; i<this.colors.length; i++){
-                this.colors[i]-=5;
+                this.colors[i]-=3;
             }
         }
     }

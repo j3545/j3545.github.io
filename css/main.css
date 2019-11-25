@@ -60,4 +60,5 @@ body {
 }
 #spaceship{
   background-color: #000;
+  touch-action: none;
 }
