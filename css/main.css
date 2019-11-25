@@ -55,12 +55,9 @@ body {
   background-color: #ddd;
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
 }
-
 .canvas-container{
-  background-color: #29a19c;
   margin: 50px;
-  padding: 20px;
 }
-canvas{
-  background-color: #a3f7bf;
+#spaceship{
+  background-color: #000;
 }

@@ -24,6 +24,8 @@ class CircleCanvas {
     setupCanvas(){
         // Set up circle canvas
         this.canvas = document.getElementById("circles");
+        console.log('in this');
+        
         
         this.canvas.width = window.innerWidth/1.2;
         this.canvas.height = window.innerHeight/2;
@@ -47,17 +49,17 @@ class CircleCanvas {
         this.setupCanvas();
         this.canvas.addEventListener('mousemove', (e)=>{
 
-            // this.mouse.x = e.x - this.canvas.getBoundingClientRect().left;
-            // this.mouse.y = e.y - this.canvas.getBoundingClientRect().top;
+            this.mouse.x = e.x - this.canvas.getBoundingClientRect().left;
+            this.mouse.y = e.y - this.canvas.getBoundingClientRect().top;
             
-            // this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
+            this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
         });
         this.canvas.addEventListener('touchmove', (e)=>{            
             
-            // this.mouse.x = e.changedTouches[0].clientX - this.canvas.getBoundingClientRect().left;
-	        // this.mouse.y = e.changedTouches[0].clientY - this.canvas.getBoundingClientRect().top;
+            this.mouse.x = e.changedTouches[0].clientX - this.canvas.getBoundingClientRect().left;
+	        this.mouse.y = e.changedTouches[0].clientY - this.canvas.getBoundingClientRect().top;
             
-            // this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
+            this.circleArray.push(new Circle(this.mouse.x, this.mouse.y));
             
         });
         this.animate();

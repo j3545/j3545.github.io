@@ -1,6 +1,3 @@
-function showNav(x) {
-    
-}
 
 let menu = document.getElementsByClassName("hamburger")[0];
 let menuClone = menu.cloneNode(true);
@@ -14,8 +11,6 @@ menuClone.addEventListener("click", function(){
 });
 
 document.getElementById("myNav").prepend(menuClone);
-
-
 
 menu.addEventListener("click", function(){
     if(!isNavOpened){            
