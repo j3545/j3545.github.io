@@ -45,6 +45,7 @@ function setupSpaceshipGame(canvas){
     let parent = document.getElementById("spaceship").parentElement;
     let particleArray = [];
     let enemyArray = [];
+    let gameOverBoo = false;
 
     
     canvas.width = parent.clientWidth;
@@ -69,16 +70,22 @@ function setupSpaceshipGame(canvas){
     });
 
     canvas.addEventListener('mousedown', function(e){
-        if(stopGame == true){
+        if(gameOverBoo){
             reset();
         }
     });
 
+    canvas.addEventListener('touchstart', function(e){
+        mouse.x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
+        mouse.y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
+        if(gameOverBoo){
+            reset();
+        }
+    });
     
     canvas.addEventListener('touchmove', function(e){
         mouse.x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
         mouse.y = e.changedTouches[0].clientY - canvas.getBoundingClientRect().top;
-        
     });
 
     
@@ -371,6 +378,7 @@ function setupSpaceshipGame(canvas){
 
     function gameOver(){
         //stopGame = true;
+        gameOverBoo = true;
         c.beginPath();
         c.fillStyle = 'White';
         c.font="50px sans-serif";
@@ -379,6 +387,7 @@ function setupSpaceshipGame(canvas){
     }
 
     function reset(){
+        gameOverBoo = false;
         let length = 20;
         cancelAnimationFrame(animateID);
         bulletArray = [];

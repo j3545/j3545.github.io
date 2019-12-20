@@ -55,11 +55,14 @@ body {
   background-color: #ddd;
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
 }
+.todo .done{
+  text-decoration-line: line-through;
+}
 .canvas-container{
   margin: 60px 120px;
 }
 .canvas-container a{
-  color:#63d6f0;
+  color:#0e1011;
   text-decoration: none;
 }
 .canvas-container a:hover{
