@@ -23,8 +23,11 @@ menu.addEventListener("click", function(){
 
 function openNav() {
     document.getElementById("myNav").style.height = "80%";
-  }
-  
-  function closeNav() {
-    
-  }
+}
+
+function closeNav() {
+
+}
+
+let spaceship = document.getElementById('spaceship');
+setupSpaceshipGame(spaceship);

@@ -289,8 +289,7 @@ function setupSpaceshipGame(canvas){
                 this.x = mouse.x;
                 this.y = mouse.y;
                 this.draw();                
-                            
-                //this.fire();
+                                            
                 //update bullet
                 if(this.bulletArray.length > 0){
                     for(let i =0; i < this.bulletArray.length; i++){
@@ -325,24 +324,12 @@ function setupSpaceshipGame(canvas){
                 this.bulletCount++;
                 setInterval(function(){
                     //length dx dy rotation
-                    let bullet = new Bullet(10, -13, -13, 145, player.damage);
-                    
+                    let bullet = new Bullet(0, 0, -13, 145, player.damage);
                     player.bulletArray.push(bullet);
-
-                    bullet = new Bullet(10, 13, -13, -145, player.damage);
-                    player.bulletArray.push(bullet);
-
-                    bullet = new Bullet(10, 6, -13, -180, player.damage);
-                    player.bulletArray.push(bullet);
-
-                    bullet = new Bullet(10, -6, -13, -180, player.damage);
-                    player.bulletArray.push(bullet);
-
-                    bullet = new Bullet(10, 0, -13, 0, player.damage);
-                    player.bulletArray.push(bullet);
-                }, 1000);
+                }, 100);
                 
             };
+            this.fire();
     
         }
     }
