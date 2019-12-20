@@ -9,10 +9,13 @@ https://colorhunt.co/palette/163836
   }
   .todo{
     color: #2e2f3e;
-    margin: 50px;
+    margin: 120px;
     padding: 50px;
     background-color: #ddd;
     font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+  }
+  .todo .done{
+    text-decoration-line: line-through;
   }
 }
 @media (prefers-color-scheme: light) {
