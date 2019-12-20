@@ -56,9 +56,24 @@ body {
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
 }
 .canvas-container{
-  margin: 120px;
+  margin: 60px 120px;
+}
+.canvas-container a{
+  color:#63d6f0;
+  text-decoration: none;
+}
+.canvas-container a:hover{
+  color:#4394a6;
 }
 #spaceship{
+  background-color: #000;
+  touch-action: none;
+}
+#boids{
+  background-color: #000;
+  touch-action: none;
+}
+#sun{
   background-color: #000;
   touch-action: none;
 }

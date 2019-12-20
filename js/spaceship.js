@@ -42,13 +42,13 @@ function setupSpaceshipGame(canvas){
         x: 0,
         y: 0
       }
-    let parent = document.getElementsByClassName("canvas-container");
+    let parent = document.getElementById("spaceship").parentElement;
     let particleArray = [];
     let enemyArray = [];
 
     
-    canvas.width = parent[0].offsetWidth;
-    canvas.height = window.innerHeight/2;
+    canvas.width = parent.clientWidth;
+    canvas.height = parent.offsetHeight*2;
 
     
     window.addEventListener('resize', function(){
@@ -290,7 +290,7 @@ function setupSpaceshipGame(canvas){
                 this.y = mouse.y;
                 this.draw();                
                             
-                this.fire();
+                //this.fire();
                 //update bullet
                 if(this.bulletArray.length > 0){
                     for(let i =0; i < this.bulletArray.length; i++){
@@ -323,7 +323,7 @@ function setupSpaceshipGame(canvas){
             
             this.fire = function() {
                 this.bulletCount++;
-                setTimeout(function(){
+                setInterval(function(){
                     //length dx dy rotation
                     let bullet = new Bullet(10, -13, -13, 145, player.damage);
                     
@@ -340,7 +340,7 @@ function setupSpaceshipGame(canvas){
 
                     bullet = new Bullet(10, 0, -13, 0, player.damage);
                     player.bulletArray.push(bullet);
-                }, 150);
+                }, 1000);
                 
             };
     
@@ -412,4 +412,4 @@ function setupSpaceshipGame(canvas){
     init();
 }
 
-setupSpaceshipGame(canvas);
+//setupSpaceshipGame(canvas);

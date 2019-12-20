@@ -1,3 +1,5 @@
-I use this site to show some of my games/animations
+#jedulz.github.io
 
-You can create some really neat stuff with it
+I use this github page to show some of the work ive done using HTML5 canvas
+
+
